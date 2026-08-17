@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 1. O Cenário
  
   A Sabemi precisa processar notificações de pagamentos (Webhooks) vindas de um
@@ -36,13 +35,4 @@
   • Visualização de Erros: Se um evento falhar na validação, ele deve aparecer
   com um alerta visual claro no painel.
 
----
-Fluxo sugerido pela IA.
 
-<img width="698" height="559" alt="Sem título" src="https://github.com/user-attachments/assets/d821dc66-83e0-418c-900c-6278785f33e0" />
-
-
-=======
-# SABEMI-TEC
-Processar  de notificações de pagamentos (Webhooks) vindas de um banco parceiro.
->>>>>>> 7c0db45edef7a3a6cc93f1a5cf5a0a87043e8688
