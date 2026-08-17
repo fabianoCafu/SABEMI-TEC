@@ -1,0 +1,101 @@
+# ==========================
+# Visual Studio
+# ==========================
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ==========================
+# Build
+# ==========================
+bin/
+obj/
+out/
+publish/
+
+# ==========================
+# Rider / VS Code
+# ==========================
+.idea/
+.vscode/
+
+# ==========================
+# Node.js
+# ==========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================
+# React / Vite
+# ==========================
+dist/
+dist-ssr/
+.vite/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Environment
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# Certificates
+# ==========================
+*.pfx
+*.p12
+*.pem
+*.crt
+*.key
+
+# ==========================
+# Database
+# ==========================
+*.mdf
+*.ldf
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================
+# NuGet
+# ==========================
+*.nupkg
+packages/
+.nuget/
+
+# ==========================
+# Test Results
+# ==========================
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# ==========================
+# SonarQube
+# ==========================
+.sonarqube/
+.scannerwork/
+
+# ==========================
+# Docker
+# ==========================
+docker-compose.override.yml

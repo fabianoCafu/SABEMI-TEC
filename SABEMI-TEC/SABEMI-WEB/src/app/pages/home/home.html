@@ -1,0 +1,33 @@
+@if (toastVisivel()) {
+    <div class="toast toast-error">
+        <span class="toast-icon">
+            !
+        </span>
+        <span>
+            {{ mensagemToast() }}
+        </span>
+        <button type="button" class="toast-close" (click)="toastVisivel.set(false)">×</button>
+    </div>
+}
+
+<div class="filters">
+    <div class="form-group">
+        <label for="contrato">Contrato</label>
+        <input id="idContrato" type="text" placeholder="Nº do contrato" [(ngModel)]="contratoFiltro" (keyup)="PesquisarPagamentos()">
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select id="IdStatus" [(ngModel)]="statusFiltro" (change)="PesquisarPagamentos()">
+            @for (option of statusOptions; track option.value) {
+                <option [value]="option.value">
+                    {{ option.label }}
+                </option>
+            }
+        </select>  
+    </div>
+</div>
+<app-table
+    [columns]="columns"
+    [data]="pagamentos()">
+</app-table>
+

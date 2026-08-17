@@ -1,0 +1,40 @@
+<table class="table">
+    <thead>
+        <tr>
+        @for (column of columns; track column.field) {
+           <th
+               [style.width]="column.width"
+               [style.text-align]="column.align">
+               {{ column.header }}
+            </th>
+        }
+        </tr>
+    </thead>
+    <tbody>
+        @for (row of data; track $index) {
+        <tr>
+            @for (column of columns; track column.field) {
+                <td [style.text-align]="column.align">
+                    @if (row[column.field] === 'SUCESSO' || row[column.field] === 'ERRO') {
+                        <span
+                            [class]="column.cellClass ? column.cellClass(row) : ''">
+                            {{ row[column.field] }}
+                        </span>
+                    } @else {
+                        {{ row[column.field] }}
+                    }
+                </td>
+            }
+        </tr>
+        }
+        @if (data.length === 0) {
+        <tr>
+            <td
+                [attr.colspan]="columns.length"
+                style="text-align: center">
+                Nenhum pagamento encontrado
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
