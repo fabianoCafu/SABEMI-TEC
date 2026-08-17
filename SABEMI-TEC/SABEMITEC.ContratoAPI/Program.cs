@@ -55,16 +55,14 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-// CORS para Angular + SignalR
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AngularPolicy", policy =>
     {
-        policy
-            .WithOrigins("http://localhost:4200")
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 

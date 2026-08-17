@@ -7,7 +7,6 @@ namespace SABEMITEC.ContratoAPI.Repository
     {
         Task<Result<List<StatusContrato>>> GetListContractAsync();
         Task<Result<StatusContrato>> CreateAsync(StatusContrato eventoBruto);
-        Task<Result<StatusContrato>> UpdateAsync(StatusContrato eventoBruto);
         Task<Result<Boolean>> ExistsAsync(string idTransacao, string idContrato);
     }
 }

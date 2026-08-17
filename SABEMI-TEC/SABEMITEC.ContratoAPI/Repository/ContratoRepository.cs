@@ -79,34 +79,5 @@ namespace SABEMITEC.ContratoAPI.Repository
                 return Result<bool>.Failure("Erro interno ao validar se existe Contrato.");
             }
         }
-
-        public async Task<Result<StatusContrato>> UpdateAsync(StatusContrato statusContrato)
-        {
-            try
-            {
-                var contrato = await _context.StatusContrato!.FirstOrDefaultAsync(x => x.Id == statusContrato.Id);
-
-                if (contrato == null)
-                {
-                    return Result<StatusContrato>.Failure("Status do contrato não encontrado.");
-                }
-
-                contrato.IdTransacao = statusContrato.IdTransacao;
-                contrato.IdContrato = statusContrato.IdContrato;
-                contrato.Status = statusContrato.Status;
-                contrato.Falha = statusContrato.Falha;
-                contrato.DataProcessamento = statusContrato.DataProcessamento;
-
-                await _context.SaveChangesAsync();
-                await _hubContext.Clients.All.SendAsync("PagamentoAtualizado");
-
-                return Result<StatusContrato>.Success(contrato);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao atualizar StatusContrato.");
-                return Result<StatusContrato>.Failure("Erro interno ao atualizar o StatusContrato.");
-            }
-        }
     }
 }
