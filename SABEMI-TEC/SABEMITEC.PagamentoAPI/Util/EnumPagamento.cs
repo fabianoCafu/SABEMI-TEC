@@ -6,7 +6,6 @@ namespace SABEMITEC.PagamentoAPI.Util
     {
         public enum EnumStatusPagamento
         {
-
             [Description("QUITAÇÃO")]
             Quitacao,
 

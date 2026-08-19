@@ -47,7 +47,6 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<EventoStatusContratoConsumer>();
-
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", h => { h.Username("guest"); h.Password("guest");});

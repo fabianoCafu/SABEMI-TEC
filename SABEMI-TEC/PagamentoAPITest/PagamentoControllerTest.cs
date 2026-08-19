@@ -41,8 +41,7 @@ namespace PagamentoAPITest
         public async Task Pagamento_Deve_RetornarBadRequest400_QuandoEventoBrutoRetornarFalha()
         {
             // Arrange 
-            string mensagem = "Erro ao cadastrar evento.";
-
+            var mensagem = "Erro ao cadastrar evento.";
             _mockEventoBrutoService.Setup(x => x.CreateEventAsync(It.IsAny<EventoBruto>()))
                                    .ReturnsAsync(Result<EventoBruto>.Failure(mensagem));
 
