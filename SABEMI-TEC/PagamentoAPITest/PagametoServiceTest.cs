@@ -155,7 +155,7 @@ namespace PagamentoAPITest
         }
 
         #region Metodos Privates
-        private PagamentoDTO PagamentoDtoPayloadComSucesso()
+        private static PagamentoDTO PagamentoDtoPayloadComSucesso()
         {
             return new PagamentoDTO
             {
@@ -167,7 +167,7 @@ namespace PagamentoAPITest
             };
         }
 
-        private PagamentoDTO PagamentoDtoPayloadComErro()
+        private static PagamentoDTO PagamentoDtoPayloadComErro()
         {
             return new PagamentoDTO
             {
@@ -179,7 +179,7 @@ namespace PagamentoAPITest
             };
         }
 
-        private EventoBruto DefinirEventoBruto(PagamentoDTO pagamentoDto)
+        private static EventoBruto DefinirEventoBruto(PagamentoDTO pagamentoDto)
         {
             return new EventoBruto()
             {
