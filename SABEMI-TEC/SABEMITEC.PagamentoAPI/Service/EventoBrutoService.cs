@@ -70,23 +70,29 @@ namespace SABEMITEC.PagamentoAPI.Service
 
                 if (newGrossEvent.IsSuccess)
                 {
-                    var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:status-contrato"));
-
-                    if (payload.IsFailure)
-                    {
-                        await endpoint.Send(new EventoStatusContrato(payment.IdTransacao!, payment.IdContrato!, StatusContrato.Erro.GetDescription(), payload.Error));
-                    }
-                    else
-                    {
-                        await endpoint.Send(new EventoStatusContrato(payment.IdTransacao!, payment.IdContrato!, StatusContrato.Sucesso.GetDescription()));
-                    }
-
+                    PublishRabbitMQMessage(payload, payment);
                     return Result<bool>.Success(true);
                 }
                 else
                 {
                     return Result<bool>.Failure(newGrossEvent.Error!);
                 }   
+            }
+        }
+
+        private async void PublishRabbitMQMessage(
+            Result<bool> payload,
+            PagamentoDTO payment)
+        {
+            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:status-contrato"));
+
+            if (payload.IsFailure)
+            {
+                await endpoint.Send(new EventoStatusContrato(payment.IdTransacao!, payment.IdContrato!, StatusContrato.Erro.GetDescription(), payload.Error));
+            }
+            else
+            {
+                await endpoint.Send(new EventoStatusContrato(payment.IdTransacao!, payment.IdContrato!, StatusContrato.Sucesso.GetDescription()));
             }
         }
 

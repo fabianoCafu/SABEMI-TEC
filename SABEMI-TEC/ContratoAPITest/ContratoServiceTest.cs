@@ -1,11 +1,9 @@
-﻿using Moq;
-using AutoMapper;
-using SABEMITEC.Shared.Event;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using SABEMITEC.ContratoAPI.Models;
-using SABEMITEC.ContratoAPI.Service;
 using SABEMITEC.ContratoAPI.Repository;
-
+using SABEMITEC.ContratoAPI.Service;
+using SABEMITEC.Shared.Event;
 using static SABEMITEC.Shared.PartnerResult;
 
 namespace ContratoAPITest
@@ -46,7 +44,6 @@ namespace ContratoAPITest
 
             _mockContratoRepository.Verify(x => x.GetListContractAsync(), Times.Once);
         }
-
 
         [Fact]
         public async void GetListContractAsync_Deve_RetornarSucesso_QuandoExistirStatusContratoCadastrado()

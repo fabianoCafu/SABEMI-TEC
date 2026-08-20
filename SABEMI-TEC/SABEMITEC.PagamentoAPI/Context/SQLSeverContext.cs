@@ -6,7 +6,7 @@ namespace SABEMITEC.PagamentoAPI.Context
     public class SQLSeverContext : DbContext
     {
         public SQLSeverContext(DbContextOptions<SQLSeverContext> options)
-        : base(options) { }
+            : base(options) { }
 
         public DbSet<EventoBruto> ? LogEventosBruto { get; set; }
 
@@ -21,14 +21,14 @@ namespace SABEMITEC.PagamentoAPI.Context
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                    .IsRequired();
+                      .IsRequired();
 
                 entity.Property(e => e.Payload) 
-                    .HasColumnType("nvarchar(max)")
-                    .IsRequired();
+                      .HasColumnType("nvarchar(max)")
+                      .IsRequired();
 
                 entity.Property(e => e.DataRecebimento)
-                    .IsRequired();
+                      .IsRequired();
             });
 
            #endregion

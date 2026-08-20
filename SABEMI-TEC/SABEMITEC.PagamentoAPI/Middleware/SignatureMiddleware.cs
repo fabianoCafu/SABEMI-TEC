@@ -22,6 +22,7 @@ namespace SABEMITEC.PagamentoAPI.Middleware
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await context.Response.WriteAsync("Signature não informada.");
+
                 return;
             }
 
@@ -39,6 +40,7 @@ namespace SABEMITEC.PagamentoAPI.Middleware
             {
                 context.Response.StatusCode = StatusCodes.Status403Forbidden;
                 await context.Response.WriteAsync("Signature inválida.");
+
                 return;
             }
 

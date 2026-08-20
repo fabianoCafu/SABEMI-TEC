@@ -82,7 +82,6 @@ namespace ContratoAPITest
             _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
         }
 
-
         [Fact]
         public async Task PagamentosProcessados_Deve_Retornar_InternalServerError500_QuandoOcorrerUmaException()
         {

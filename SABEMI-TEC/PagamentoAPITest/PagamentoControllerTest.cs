@@ -56,7 +56,6 @@ namespace PagamentoAPITest
             _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()), Times.Once);
         }
 
-
         [Fact]
         public async Task Pagamento_Deve_RetornarOk200_QuandoEventoForCadastradoComSucesso()
         {

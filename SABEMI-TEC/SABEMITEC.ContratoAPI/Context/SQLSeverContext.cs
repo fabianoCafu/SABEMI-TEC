@@ -6,7 +6,7 @@ namespace SABEMITEC.ContratoAPI.Context
     public class SQLSeverContext : DbContext
     {
         public SQLSeverContext(DbContextOptions<SQLSeverContext> options)
-      : base(options) { }
+            : base(options) { }
 
         public DbSet<StatusContrato>? StatusContrato { get; set; }
 
