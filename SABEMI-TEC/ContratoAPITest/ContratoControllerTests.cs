@@ -86,6 +86,7 @@ namespace ContratoAPITest
         public async Task PagamentosProcessados_Deve_Retornar_InternalServerError500_QuandoOcorrerUmaException()
         {
             // Arrange
+            var mensagem = "Ocorreu um erro interno no servidor.";
             _mockContratoService.Setup(x => x.GetListContractAsync())
                                 .ThrowsAsync(new Exception("Internal Server Error"));
 
@@ -96,7 +97,7 @@ namespace ContratoAPITest
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
 
             Assert.Equal(500, statusCodeResult.StatusCode);
-            Assert.Equal("Ocorreu um erro interno no servidor.", statusCodeResult.Value);
+            Assert.Equal(mensagem, statusCodeResult.Value);
 
             _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
         }
