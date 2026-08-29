@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
             next: (data) => {
                 if (this.primeiraCarga) {
                     data.forEach(pagamento => {
-                        this.pagamentosConhecidos.set(String(pagamento.idTransacao),pagamento.status);
+                        this.pagamentosConhecidos.set(String(pagamento.idTransacao), pagamento.status);
                     });
                     this.primeiraCarga = false;
                 } else {
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
                             }
                         }
 
-                        this.pagamentosConhecidos.set(String(pagamento.idTransacao),pagamento.status);
+                        this.pagamentosConhecidos.set(String(pagamento.idTransacao), pagamento.status);
                     });
                 }
 

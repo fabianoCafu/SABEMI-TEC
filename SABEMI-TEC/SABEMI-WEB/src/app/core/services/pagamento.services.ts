@@ -14,7 +14,6 @@ export class PagamentoServices {
     private readonly pathApi = `${environment.apiUrl}/pagamentos-processados`;
 
     GetPagamentos(): Observable<Pagamento[]> {
-
         return this.http.get<any>(this.pathApi).pipe(
             map(response => {
                 const pagamentos: Pagamento[] =
