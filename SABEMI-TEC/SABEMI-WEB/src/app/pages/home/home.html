@@ -1,13 +1,8 @@
 @if (toastVisivel()) {
-    <div class="toast toast-error">
-        <span class="toast-icon">
-            !
-        </span>
-        <span>
-            {{ mensagemToast() }}
-        </span>
-        <button type="button" class="toast-close" (click)="toastVisivel.set(false)">×</button>
-    </div>
+    <app-toast
+        [mensagem]="mensagemToast()"
+        (fechar)="toastVisivel.set(false)">
+    </app-toast> 
 }
 
 <div class="filters">

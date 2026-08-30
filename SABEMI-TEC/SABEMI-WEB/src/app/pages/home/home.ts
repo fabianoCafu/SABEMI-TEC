@@ -5,11 +5,12 @@ import { PagamentoServices } from '../../core/services/pagamento.services';
 import { Pagamento } from '../../models/pagamento';
 import { PagamentoSignalrService } from '../../core/services/pagamento-signalr.service';
 import { FormsModule } from '@angular/forms';
+import { ToastComponent } from '../../shared/components/toast/toast.component';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [TableComponent, FormsModule],
+    imports: [TableComponent, FormsModule, ToastComponent],
     templateUrl: './home.html',
     styleUrl: './home.css',
 })
@@ -40,9 +41,7 @@ export class HomeComponent implements OnInit {
     [
         { field: 'idContrato', header: 'Contrato', width: '80px', align: 'center'},
         { field: 'dataProcessamento', header: 'Data Proc.', align: 'center'},
-        { field: 'status', header: 'Status', align: 'center',
-            cellClass: (row) => row.status === 'ERRO' ? 'status-error' : 'status-success'
-        },
+        { field: 'status', header: 'Status', align: 'center', cellClass: (row) => row.status === 'ERRO' ? 'status-error' : 'status-success'},
         { field: 'falha', header: 'Falha', align: 'left'}
     ];
 
