@@ -115,4 +115,4 @@ jobs:
 
       - name: Pack
         run: dotnet pack SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
-```
+
