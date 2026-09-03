@@ -36,10 +36,7 @@ jobs:
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
       - name: Test
         run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
-      # Novo trecho
-      - name: Run Tests with Coverage
-        run: npm test -- --coverage
-
+      
   sonarqube:
     name: SONARQUBE
     runs-on: ubuntu-latest
