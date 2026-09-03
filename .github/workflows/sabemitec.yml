@@ -45,7 +45,8 @@ jobs:
         with:
           fetch-depth: 0
       - name: SonarQubeCloud
-        uses: SonarSource/sonarcloud-github-action@v6
+        uses: SonarSource/sonarcloud-github-action@v3
+        #uses: SonarSource/sonarcloud-github-action@v6
         with:
           args: >
             -Dsonar.projectKey=fabianoCafu_SABEMI-TEC4
