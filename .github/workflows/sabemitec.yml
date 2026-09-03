@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       # ==========================================
-      # .NET
+      # .NET 6
       # ==========================================
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -38,7 +38,7 @@ jobs:
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
 
       # ==========================================
-      # INSTALAR SONARSCANNER PARA .NET
+      # SONARSCANNER
       # ==========================================
       - name: Install SonarScanner
         run: dotnet tool install --global dotnet-sonarscanner
@@ -52,7 +52,9 @@ jobs:
             /k:"fabianoCafu_SABEMI-TEC4" \
             /o:"fabianocafu" \
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
-            /d:sonar.host.url="https://sonarcloud.io"
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
+            /d:sonar.qualitygate.wait=true
 
       # ==========================================
       # BUILD
@@ -65,14 +67,25 @@ jobs:
             --no-incremental
 
       # ==========================================
-      # TESTES
+      # TESTES + COBERTURA
       # ==========================================
-      - name: Test
+      - name: Test + Coverage
         run: |
           dotnet test SABEMI-TEC/SABEMI-TEC.sln \
-            --no-restore \
             --configuration Release \
-            --no-build
+            --no-build \
+            --no-restore \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./TestResults \
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+
+      # ==========================================
+      # LOCALIZAR COBERTURA
+      # ==========================================
+      - name: List Coverage Files
+        run: |
+          echo "Arquivos de cobertura encontrados:"
+          find . -name "coverage.opencover.xml" -type f
 
       # ==========================================
       # SONAR END
