@@ -1,3 +1,4 @@
+
 name: CI-SABEMI-TEC
 
 on:
@@ -35,13 +36,15 @@ jobs:
       # RESTORE
       # ==========================================
       - name: Restore
-        run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
+        run: |
+          dotnet restore SABEMI-TEC/SABEMI-TEC.sln
 
       # ==========================================
       # SONARSCANNER
       # ==========================================
       - name: Install SonarScanner
-        run: dotnet tool install --global dotnet-sonarscanner
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
 
       # ==========================================
       # SONAR BEGIN
@@ -53,6 +56,7 @@ jobs:
             /o:"fabianocafu" \
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
             /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.sourceEncoding="UTF-8" \
             /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
             /d:sonar.qualitygate.wait=true
 
@@ -80,12 +84,12 @@ jobs:
             -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
       # ==========================================
-      # LOCALIZAR COBERTURA
+      # VALIDAR RELATÓRIO DE COBERTURA
       # ==========================================
-      - name: List Coverage Files
+      - name: Verify Coverage
         run: |
-          echo "Arquivos de cobertura encontrados:"
-          find . -name "coverage.opencover.xml" -type f
+          echo "Relatórios de cobertura encontrados:"
+          find . -name "coverage.opencover.xml" -type f -print
 
       # ==========================================
       # SONAR END
@@ -94,3 +98,4 @@ jobs:
         run: |
           dotnet sonarscanner end \
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
