@@ -20,7 +20,6 @@ jobs:
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
       - name: Build
         run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
-
   test:
     name: TESTES UNITARIOS
     runs-on: ubuntu-latest
@@ -35,39 +34,27 @@ jobs:
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
       - name: Test
-        run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
-      
+        run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release      
   sonarqube:
-    name: SONARQUBE
+    name: SONARQUBECLOUD
     runs-on: ubuntu-latest
     needs: test
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        #uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: SonarQube
-        uses: sonarsource/sonarqube-scan-action@v6
-        #uses: sonarsource/sonarqube-scan-action@82c9f564757c2ba4313fa4bb66133efbfae7e60c # v5.3.2
-        #uses: sonarsource/sonarqube-scan-action@00f65dd4a2a11bdfddbe4b600bbfa143dd981881 # v6.0.0
-        #uses: SonarSource/sonarqube-scan-action@0302b11e2f3d6dbecff0b86a8ff60e4be68bc636
-        #uses: SonarSource/sonarqube-scan-action@0302b11e2f3d6dbecff0b86a8ff60e4be68bc636 # v6.2.0
-        #uses: SonarSource/sonarqube-scan-action@00f65dd4a2a11bdfddbe4b600bbfa143dd981881 # v6.0.0
-        #uses: SonarSource/sonarqube-scan-action@54a014e5a31a98075f82c40c8227b686e58b88d6 # v6.0.0
-        #uses: SonarSource/sonarqube-scan-action@0302b11e2f3d6dbecff0b86a8ff60e4be68bc636 # v6.2.0
-        #uses: SonarSource/sonarqube-scan-action@3313562ec8034f1d1984254e1559461128130aa5 # v6
-        #uses: SonarSource/sonarqube-scan-action@v6
+      - name: SonarQubeCloud
+        uses: SonarSource/sonarcloud-github-action@v6
         with:
           args: >
             -Dsonar.projectKey=fabianoCafu_SABEMI-TEC4
             -Dsonar.projectName=SABEMI-TEC
             -Dsonar.organization=fabianocafu
             -Dsonar.sources=.
+            -Dsonar.qualitygate.wait=true
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          #SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
   nuget:
     name: PUBLISH NUGET
     runs-on: ubuntu-latest
