@@ -48,12 +48,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
+
       - name: Install SonarScanner
         run: dotnet tool install --global dotnet-sonarscanner
+
       - name: SonarQube Begin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -64,21 +67,23 @@ jobs:
           /d:sonar.token="$SONAR_TOKEN"
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.sourceEncoding="UTF-8"
-          /d:sonar.projectBaseDir="${{ github.workspace }}/SABEMI-TEC"
-          #/d:sonar.qualitygate.wait="true"
-          /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.cobertura.xml"
+          /d:sonar.qualitygate.wait="true"
+          /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/**/TestResults/**/coverage.cobertura.xml"
 
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
+
       - name: Build
         run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-incremental
+
       - name: Test
         run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage"
+            
       - name: SonarQube End
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
-          
+ 
   nuget:
     name: PUBLISH NUGET
     runs-on: ubuntu-latest
