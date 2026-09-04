@@ -64,6 +64,8 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: SonarQube Begin
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           dotnet sonarscanner begin\
             /k:"fabianoCafu_SABEMI-TEC4"\
