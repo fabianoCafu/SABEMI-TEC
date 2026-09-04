@@ -39,7 +39,7 @@ namespace SABEMITEC.PagamentoAPI.Middleware
             if (!string.Equals(signature, signatureCalculada, StringComparison.OrdinalIgnoreCase))
             {
                 context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                await context.Response.WriteAsync("Signature inválida.");
+                await context.Response.WriteAsync("Signature inválida.", context.RequestAborted);
 
                 return;
             }
