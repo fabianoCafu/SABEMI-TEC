@@ -128,6 +128,5 @@ namespace SABEMITEC.PagamentoAPI.Service
         }
 
         #endregion
-
     }
 }
