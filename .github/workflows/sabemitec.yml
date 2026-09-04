@@ -68,7 +68,7 @@ jobs:
         run: |
           dotnet sonarscanner begin\
             /k:"fabianoCafu_SABEMI-TEC4"\
-            /o:"fabianocafu"\
+            /o:"fabianoCafu"\
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}"\
             /d:sonar.host.url="https://sonarcloud.io"\
             /d:sonar.sourceEncoding="UTF-8"\
