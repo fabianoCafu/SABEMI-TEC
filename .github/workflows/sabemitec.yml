@@ -70,7 +70,7 @@ jobs:
           dotnet sonarscanner begin\
             /k:"fabianoCafu_SABEMI-TEC4"\
             /o:"fabianocafu"\
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"\
+            /d:sonar_token="$SONAR_TOKEN"\
             /d:sonar.host.url="https://sonarcloud.io"\
             /d:sonar.sourceEncoding="UTF-8"\
             /d:sonar.qualitygate.wait="true"
