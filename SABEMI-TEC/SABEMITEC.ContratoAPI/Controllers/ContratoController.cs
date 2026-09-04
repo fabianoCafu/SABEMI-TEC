@@ -5,7 +5,7 @@ namespace SABEMITEC.ContratoAPI.Controllers
 {
     [ApiController]
     [Route("contratos")]
-    public class ContratoController : Controller
+    public class ContratoController : ControllerBase
     {
         private readonly IContratoService _contratoService;
         private readonly ILogger<ContratoController> _logger;
