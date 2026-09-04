@@ -70,7 +70,7 @@ namespace SABEMITEC.PagamentoAPI.Service
 
                 if (newGrossEvent.IsSuccess)
                 {
-                    PublishRabbitMQMessage(payload, payment);
+                    await PublishRabbitMQMessage(payload, payment);
                     return Result<bool>.Success(true);
                 }
                 else
@@ -80,7 +80,7 @@ namespace SABEMITEC.PagamentoAPI.Service
             }
         }
 
-        private async void PublishRabbitMQMessage(
+        private async Task PublishRabbitMQMessage(
             Result<bool> payload,
             PagamentoDTO payment)
         {
