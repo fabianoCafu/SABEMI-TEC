@@ -14,8 +14,8 @@ namespace SABEMITEC.ContratoAPI.Service
             IContratoRepository contratoRepository,
             ILogger<ContratoService> logger)
         {
-            _contratoRepository = contratoRepository ?? throw new ArgumentNullException(nameof(contratoRepository));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); 
+            _contratoRepository = contratoRepository;
+            _logger = logger;
         }
 
         public async Task<Result<List<StatusContrato>>> GetListContractAsync()

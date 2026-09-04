@@ -21,9 +21,9 @@ namespace SABEMITEC.PagamentoAPI.Service
             ISendEndpointProvider sendEndpointProvider,
             ILogger<EventoBrutoService> logger)
         {
-            _eventoBrutoRepository = eventoBrutoRepository ?? throw new ArgumentNullException(nameof(eventoBrutoRepository));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _eventoBrutoRepository = eventoBrutoRepository; 
             _sendEndpointProvider = sendEndpointProvider;
+            _logger = logger;
         }
 
         public async Task<Result<EventoBruto>> CreateEventAsync(EventoBruto eventoBruto)

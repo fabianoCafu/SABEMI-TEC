@@ -14,8 +14,8 @@ namespace SABEMITEC.PagamentoAPI.Repository
             SqlSeverContextPagamento context,
             ILogger<EventoBrutoRepository> logger)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _context = context;
+            _logger = logger;
         }
 
         public async Task<Result<EventoBruto>> CreateAsync(EventoBruto eventoBruto)

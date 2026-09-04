@@ -16,8 +16,8 @@ namespace SABEMITEC.PagamentoAPI.Controller
             IEventoBrutoService eventoBrutoService,
             ILogger<PagamentoController> logger)
         {
-            _eventoBrutoService = eventoBrutoService ?? throw new ArgumentNullException(nameof(eventoBrutoService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _eventoBrutoService = eventoBrutoService;
+            _logger = logger;
         }
 
         [HttpPost("pagamento")] 
