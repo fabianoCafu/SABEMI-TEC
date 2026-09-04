@@ -141,7 +141,8 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
 
             // Assert
             Assert.NotNull(result);
-            Assert.True(result.IsSuccess);
+            Assert.True(result.IsFailure);
+            Assert.False(result.IsSuccess);
         }
 
         [Fact]
