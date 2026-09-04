@@ -57,22 +57,6 @@ jobs:
       - name: Install SonarScanner
         run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: Restore
-        run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
-
-      - name: Build
-        run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-incremental
-
-      - name: Test
-        run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage"
-
-      - name: Find Coverage Report Path
-        id: coverage
-        run: |
-          REPORT_PATH=$(find ${{ github.workspace }} -name "coverage.cobertura.xml" | head -n 1)
-          echo "Found report: $REPORT_PATH"
-          echo "report_path=$REPORT_PATH" >> $GITHUB_OUTPUT
-
       - name: SonarQube Begin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -84,15 +68,23 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.sourceEncoding="UTF-8"
           /d:sonar.qualitygate.wait="true"
-          /d:sonar.coverage.jacoco.xmlReportPaths="${{ steps.coverage.outputs.report_path }}"
-          /d:sonar.cs.cobertura.reportsPaths="${{ steps.coverage.outputs.report_path }}"
+          /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.cobertura.xml"
+          /d:sonar.cs.cobertura.reportsPaths="**/TestResults/**/coverage.cobertura.xml"
 
+      - name: Restore
+        run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
+
+      - name: Build
+        run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-incremental
+
+      - name: Test
+        run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage"
+            
       - name: SonarQube End
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
-
-        
+  
   nuget:
     name: PUBLISH NUGET
     runs-on: ubuntu-latest
