@@ -21,7 +21,7 @@ namespace SABEMITEC.PagamentoAPI.Middleware
             if (!context.Request.Headers.TryGetValue("X-Signature", out var signature))
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                await context.Response.WriteAsync("Signature não informada.");
+                await context.Response.WriteAsync("Signature não informada.", context.RequestAborted);
 
                 return;
             }
