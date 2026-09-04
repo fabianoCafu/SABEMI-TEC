@@ -96,9 +96,8 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet sonarscanner end\
-            /d:sonar_token="$SONAR_TOKEN"\
-            
+          dotnet sonarscanner end
+          
   nuget:
     name: PUBLISH NUGET
     runs-on: ubuntu-latest
