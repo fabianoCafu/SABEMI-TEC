@@ -91,12 +91,13 @@ jobs:
             --no-restore\
             --configuration Release\
             --no-build
-
-      - name: SonarQube End
-        run: |
-          dotnet sonarscanner end\
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
             
+      - name: SonarQube End
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          dotnet sonarscanner end
+          
   nuget:
     name: PUBLISH NUGET
     runs-on: ubuntu-latest
