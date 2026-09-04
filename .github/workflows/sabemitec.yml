@@ -91,11 +91,13 @@ jobs:
             --no-restore\
             --configuration Release\
             --no-build
-
+            
       - name: SonarQube End
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           dotnet sonarscanner end\
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+            /d:sonar_token="$SONAR_TOKEN"\
             
   nuget:
     name: PUBLISH NUGET
