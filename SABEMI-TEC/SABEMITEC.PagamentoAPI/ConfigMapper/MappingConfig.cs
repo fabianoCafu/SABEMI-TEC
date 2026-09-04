@@ -4,7 +4,7 @@ using SABEMITEC.PagamentoAPI.Service;
 
 namespace SABEMITEC.PagamentoAPI.ConfigMapper
 {
-    public class MappingConfig
+    public static class MappingConfig
     {
         public static MapperConfiguration RegisterMaps()
         {

@@ -1,6 +1,6 @@
 export interface Pagamento {
-    idTransacao: string | any;
-    idContrato : string | any;
+    idTransacao: string;
+    idContrato : string;
     dataProcessamento : string;
     status : string;
     falha : string;

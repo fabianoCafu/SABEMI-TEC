@@ -45,7 +45,7 @@ namespace SABEMITEC.ContratoAPI.Service
             try
             {
                 var statusContrato = new StatusContrato(eventoStatusContrato.IdTransacao!, eventoStatusContrato.IdContrato!, eventoStatusContrato.Status!, eventoStatusContrato.Falha!);
-                await _contratoRepository.CreateAsync(statusContrato!);
+                await _contratoRepository.CreateAsync(statusContrato);
 
                 return Result<EventoStatusContrato>.Success("StatusContrato cadastrado com Sucesso!");  
             }

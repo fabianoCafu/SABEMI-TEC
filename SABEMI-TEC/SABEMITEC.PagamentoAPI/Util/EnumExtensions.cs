@@ -1,20 +1,24 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-public static class EnumExtensions
+namespace SABEMITEC.PagamentoAPI.Util
 {
-    public static string GetDescription(this Enum value)
+    public static class EnumExtensions
     {
-        FieldInfo? field = value.GetType().GetField(value.ToString());
-
-        if (field == null)
+        public static string GetDescription(this Enum value)
         {
-            return value.ToString();
-        }
-        
-        DescriptionAttribute? attribute = field.GetCustomAttribute<DescriptionAttribute>();
+            FieldInfo? field = value.GetType().GetField(value.ToString());
 
-        return attribute?.Description ?? value.ToString();
+            if (field == null)
+            {
+                return value.ToString();
+            }
+
+            DescriptionAttribute? attribute = field.GetCustomAttribute<DescriptionAttribute>();
+
+            return attribute?.Description ?? value.ToString();
+        }
     }
 }
+
 

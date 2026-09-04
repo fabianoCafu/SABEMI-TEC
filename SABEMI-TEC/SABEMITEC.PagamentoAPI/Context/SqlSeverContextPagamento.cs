@@ -3,9 +3,10 @@ using SABEMITEC.PagamentoAPI.Model;
 
 namespace SABEMITEC.PagamentoAPI.Context
 {
-    public class SQLSeverContext : DbContext
+    public class SqlSeverContextPagamento
+        : DbContext
     {
-        public SQLSeverContext(DbContextOptions<SQLSeverContext> options)
+        public SqlSeverContextPagamento(DbContextOptions<SqlSeverContextPagamento> options)
             : base(options) { }
 
         public DbSet<EventoBruto> ? LogEventosBruto { get; set; }

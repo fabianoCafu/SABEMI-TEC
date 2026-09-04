@@ -26,7 +26,7 @@ namespace PagamentoAPITest
         public async Task Pagamento_Deve_RetornarBadRequest400_QuandoPagamentoDtoForNull()
         {
             // Arrange
-            PagamentoDTO? pagamentoDto = null;
+            PagamentoDto? pagamentoDto = null;
 
             // Act
             var result = await _controller.Pagamento(pagamentoDto!);
@@ -46,7 +46,7 @@ namespace PagamentoAPITest
                                    .ReturnsAsync(Result<EventoBruto>.Failure(mensagem));
 
             // Act
-            var result = await _controller.Pagamento(new PagamentoDTO());
+            var result = await _controller.Pagamento(new PagamentoDto());
 
             // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -65,7 +65,7 @@ namespace PagamentoAPITest
                                    .ReturnsAsync(Result<EventoBruto>.Success(mensagem));
 
             // Act
-            var result = await _controller.Pagamento(new PagamentoDTO());
+            var result = await _controller.Pagamento(new PagamentoDto());
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
@@ -84,7 +84,7 @@ namespace PagamentoAPITest
                                    .ThrowsAsync(new Exception(mensagem));
 
             // Act
-            var result = await _controller.Pagamento(new PagamentoDTO());
+            var result = await _controller.Pagamento(new PagamentoDto());
 
             // Assert
             var statusCodeResult = Assert.IsType<ObjectResult>(result);

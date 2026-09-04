@@ -11,7 +11,7 @@ namespace SABEMITEC.PagamentoAPI.Model
 
         public EventoBruto() { }
 
-        public EventoBruto(PagamentoDTO pagamentoDto) 
+        public EventoBruto(PagamentoDto pagamentoDto) 
         {
             Payload = JsonSerializer.Serialize(pagamentoDto).ToString();
             DataRecebimento = DateTime.Now;

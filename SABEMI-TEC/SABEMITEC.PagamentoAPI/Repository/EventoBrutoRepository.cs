@@ -7,11 +7,11 @@ namespace SABEMITEC.PagamentoAPI.Repository
 {
     public class EventoBrutoRepository : IEventoBrutoRepository
     {
-        private readonly SQLSeverContext _context;
+        private readonly SqlSeverContextPagamento _context;
         private readonly ILogger<EventoBrutoRepository> _logger;
 
         public EventoBrutoRepository(
-            SQLSeverContext context,
+            SqlSeverContextPagamento context,
             ILogger<EventoBrutoRepository> logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

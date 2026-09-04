@@ -11,7 +11,7 @@ using SABEMITEC.PagamentoAPI.Context;
 
 namespace SABEMITEC.PagamentoAPI.Migrations
 {
-    [DbContext(typeof(SQLSeverContext))]
+    [DbContext(typeof(SqlSeverContextPagamento))]
     [Migration("20260804141815_DBLogEventosBruto")]
     partial class DBLogEventosBruto
     {

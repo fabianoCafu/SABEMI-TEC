@@ -8,9 +8,13 @@
 
 	<ItemGroup>
 	  <Compile Remove="Controller\NovaPasta\**" />
+	  <Compile Remove="wwwroot\**" />
 	  <Content Remove="Controller\NovaPasta\**" />
+	  <Content Remove="wwwroot\**" />
 	  <EmbeddedResource Remove="Controller\NovaPasta\**" />
+	  <EmbeddedResource Remove="wwwroot\**" />
 	  <None Remove="Controller\NovaPasta\**" />
+	  <None Remove="wwwroot\**" />
 	</ItemGroup>
 
 	<ItemGroup>

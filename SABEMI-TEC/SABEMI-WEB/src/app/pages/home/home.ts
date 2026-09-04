@@ -25,9 +25,9 @@ export class HomeComponent implements OnInit {
     mensagemToast = signal('');
     carregando = true;
 
-    private pagamentosConhecidos = new Map<string, string>();
-    private pagamentoService = inject(PagamentoServices);
-    private pagamentoSignalrService = inject(PagamentoSignalrService);
+    private readonly pagamentosConhecidos = new Map<string, string>();
+    private readonly pagamentoService = inject(PagamentoServices);
+    private readonly pagamentoSignalrService = inject(PagamentoSignalrService);
     private primeiraCarga = true;
     private filtroEstavaAtivo = false;
 
@@ -82,12 +82,8 @@ export class HomeComponent implements OnInit {
                         const pagamentoNovo = statusAnterior === undefined;
                         const virouErro = statusAnterior !== 'ERRO' && pagamento.status === 'ERRO';
 
-                        if (pagamentoNovo && pagamento.status === 'ERRO') {
+                        if ((pagamentoNovo && pagamento.status === 'ERRO') || virouErro) {
                             this.mostrarToast(pagamento.falha);
-                        } else {
-                            if (virouErro) {
-                                 this.mostrarToast(pagamento.falha);
-                            }
                         }
 
                         this.pagamentosConhecidos.set(String(pagamento.idTransacao), pagamento.status);

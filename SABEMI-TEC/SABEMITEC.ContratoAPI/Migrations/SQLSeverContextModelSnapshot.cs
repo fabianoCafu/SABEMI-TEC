@@ -10,7 +10,7 @@ using SABEMITEC.ContratoAPI.Context;
 
 namespace SABEMITEC.ContratoAPI.Migrations
 {
-    [DbContext(typeof(SQLSeverContext))]
+    [DbContext(typeof(SqlSeverContextContrato))]
     partial class SQLSeverContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

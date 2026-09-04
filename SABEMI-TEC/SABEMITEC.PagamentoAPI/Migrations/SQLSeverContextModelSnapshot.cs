@@ -10,7 +10,7 @@ using SABEMITEC.PagamentoAPI.Context;
 
 namespace SABEMITEC.PagamentoAPI.Migrations
 {
-    [DbContext(typeof(SQLSeverContext))]
+    [DbContext(typeof(SqlSeverContextPagamento))]
     partial class SQLSeverContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

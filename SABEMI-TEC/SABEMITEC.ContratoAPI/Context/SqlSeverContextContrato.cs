@@ -3,9 +3,9 @@ using SABEMITEC.ContratoAPI.Models;
 
 namespace SABEMITEC.ContratoAPI.Context
 {
-    public class SQLSeverContext : DbContext
+    public class SqlSeverContextContrato : DbContext
     {
-        public SQLSeverContext(DbContextOptions<SQLSeverContext> options)
+        public SqlSeverContextContrato(DbContextOptions<SqlSeverContextContrato> options)
             : base(options) { }
 
         public DbSet<StatusContrato>? StatusContrato { get; set; }

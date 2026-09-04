@@ -4,7 +4,7 @@ using SABEMITEC.ContratoAPI.Service;
 
 namespace SABEMITEC.ContratoAPI.ConfigMapper
 {
-    public class MappingConfig
+    public static class MappingConfig
     {
         public static MapperConfiguration RegisterMaps()
         {

@@ -21,7 +21,7 @@ namespace SABEMITEC.PagamentoAPI.Controller
         }
 
         [HttpPost("pagamento")] 
-        public async Task<IActionResult> Pagamento([FromBody] PagamentoDTO pagamentoDto)
+        public async Task<IActionResult> Pagamento([FromBody] PagamentoDto pagamentoDto)
         {
             try
             {

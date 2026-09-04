@@ -10,8 +10,8 @@ import { Observable, map } from 'rxjs';
 
 export class PagamentoServices {
 
-    private http = inject(HttpClient);
-    private readonly pathApi = `${environment.apiUrl}/pagamentos-processados`;
+    private readonly http = inject(HttpClient);
+    private readonly pathApi = `${environment.apiUrl}/contratos/pagamentos-processados`;
 
     GetPagamentos(): Observable<Pagamento[]> {
         return this.http.get<any>(this.pathApi).pipe(

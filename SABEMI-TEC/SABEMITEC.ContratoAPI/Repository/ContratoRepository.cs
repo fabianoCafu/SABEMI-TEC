@@ -10,12 +10,12 @@ namespace SABEMITEC.ContratoAPI.Repository
     public class ContratoRepository : IContratoRepository
     {
         private readonly IHubContext<PagamentoHub> _hubContext;
-        private readonly SQLSeverContext _context;
+        private readonly SqlSeverContextContrato _context;
         private readonly ILogger<ContratoRepository> _logger;
 
         public ContratoRepository(
             IHubContext<PagamentoHub> hubContext,
-            SQLSeverContext context,
+            SqlSeverContextContrato context,
             ILogger<ContratoRepository> logger)
         {
             _hubContext = hubContext;

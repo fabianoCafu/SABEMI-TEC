@@ -34,7 +34,7 @@ namespace SABEMITEC.PagamentoAPI.Middleware
             context.Request.Body.Position = 0;
 
             var secret = _configuration.GetValue<string>("WebhookSecurity:SecretKey");
-            var signatureCalculada = Gerar(body, secret!);
+            var signatureCalculada = Gerar(body, secret);
 
             if (!string.Equals(signature, signatureCalculada, StringComparison.OrdinalIgnoreCase))
             {

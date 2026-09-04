@@ -11,7 +11,7 @@ using SABEMITEC.ContratoAPI.Context;
 
 namespace SABEMITEC.ContratoAPI.Migrations
 {
-    [DbContext(typeof(SQLSeverContext))]
+    [DbContext(typeof(SqlSeverContextContrato))]
     [Migration("20260804141315_DBStatusContrato")]
     partial class DBStatusContrato
     {

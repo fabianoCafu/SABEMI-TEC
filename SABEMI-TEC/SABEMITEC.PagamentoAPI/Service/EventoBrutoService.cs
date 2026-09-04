@@ -2,6 +2,7 @@
 using SABEMITEC.PagamentoAPI.DTO;
 using SABEMITEC.PagamentoAPI.Model;
 using SABEMITEC.PagamentoAPI.Repository;
+using SABEMITEC.PagamentoAPI.Util;
 using SABEMITEC.Shared.Event;
 using System.Text.Json;
 using static SABEMITEC.PagamentoAPI.Util.EnumPagamento;
@@ -51,7 +52,7 @@ namespace SABEMITEC.PagamentoAPI.Service
 
         private async Task<Result<Boolean>> PersistEventAsync(EventoBruto grossEvent)
         {
-            var payment = JsonSerializer.Deserialize<PagamentoDTO>(JsonDocument.Parse(grossEvent.Payload));
+            var payment = JsonSerializer.Deserialize<PagamentoDto>(JsonDocument.Parse(grossEvent.Payload));
             var eventoExiste = await _eventoBrutoRepository.ExistsEventAsync(payment!.IdTransacao!);
 
             if (eventoExiste.IsSuccess)
@@ -60,7 +61,7 @@ namespace SABEMITEC.PagamentoAPI.Service
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(payment!.IdTransacao) || string.IsNullOrWhiteSpace(payment!.IdContrato))
+                if (string.IsNullOrWhiteSpace(payment.IdTransacao) || string.IsNullOrWhiteSpace(payment.IdContrato))
                 {
                     return Result<bool>.Failure("Os atributos 'id_transacao' e 'id_contrato' são obrigaórios!");
                 }
@@ -82,7 +83,7 @@ namespace SABEMITEC.PagamentoAPI.Service
 
         private async Task PublishRabbitMQMessage(
             Result<bool> payload,
-            PagamentoDTO payment)
+            PagamentoDto payment)
         {
             var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:status-contrato"));
 

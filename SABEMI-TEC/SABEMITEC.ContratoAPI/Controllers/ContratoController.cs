@@ -4,6 +4,7 @@ using SABEMITEC.ContratoAPI.Service;
 namespace SABEMITEC.ContratoAPI.Controllers
 {
     [ApiController]
+    [Route("contratos")]
     public class ContratoController : Controller
     {
         private readonly IContratoService _contratoService;

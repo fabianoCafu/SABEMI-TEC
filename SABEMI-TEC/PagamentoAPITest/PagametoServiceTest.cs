@@ -91,7 +91,7 @@ namespace PagamentoAPITest
             // Arrange
             var mensagem = "Os atributos 'id_transacao' e 'id_contrato' são obrigaórios!";
 
-            var pagamentoDto = new PagamentoDTO
+            var pagamentoDto = new PagamentoDto
             {
                 IdTransacao = "",
                 IdContrato = "",
@@ -155,9 +155,9 @@ namespace PagamentoAPITest
         }
 
         #region Metodos Privates
-        private static PagamentoDTO PagamentoDtoPayloadComSucesso()
+        private static PagamentoDto PagamentoDtoPayloadComSucesso()
         {
-            return new PagamentoDTO
+            return new PagamentoDto
             {
                 IdTransacao = "000001",
                 IdContrato = "000365",
@@ -167,9 +167,9 @@ namespace PagamentoAPITest
             };
         }
 
-        private static PagamentoDTO PagamentoDtoPayloadComErro()
+        private static PagamentoDto PagamentoDtoPayloadComErro()
         {
-            return new PagamentoDTO
+            return new PagamentoDto
             {
                 IdTransacao = "000001",
                 IdContrato = "000365",
@@ -179,7 +179,7 @@ namespace PagamentoAPITest
             };
         }
 
-        private static EventoBruto DefinirEventoBruto(PagamentoDTO pagamentoDto)
+        private static EventoBruto DefinirEventoBruto(PagamentoDto pagamentoDto)
         {
             return new EventoBruto()
             {

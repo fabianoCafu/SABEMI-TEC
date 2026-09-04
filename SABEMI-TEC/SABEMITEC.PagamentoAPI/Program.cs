@@ -8,7 +8,8 @@ using SABEMITEC.PagamentoAPI.Middleware;
 using SABEMITEC.PagamentoAPI.Repository;
 using SABEMITEC.PagamentoAPI.Service;
 
-var builder = WebApplication.CreateBuilder(args);
+var options = new WebApplicationOptions { Args = args, WebRootPath = null };
+var builder = WebApplication.CreateBuilder(options);
 var connection = builder.Configuration.GetConnectionString("DBConnectionString");
 
 if (string.IsNullOrWhiteSpace(connection))
@@ -16,7 +17,7 @@ if (string.IsNullOrWhiteSpace(connection))
     throw new InvalidOperationException("ConnectionString 'DBConnectionString' não encontrada.");
 }
 
-builder.Services.AddDbContext<SQLSeverContext>(options =>
+builder.Services.AddDbContext<SqlSeverContextPagamento>(options =>
 {
     options.UseSqlServer(connection, sql => sql.MigrationsAssembly("SABEMITEC.PagamentoAPI"));
 });
@@ -34,7 +35,7 @@ builder.Services.AddControllers()
 });
 
 builder.Services.AddSwaggerGen(options =>
-{ 
+{
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Serviço Pagamentos", Version = "v1" });
 });
 
@@ -53,16 +54,13 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pagamento API");
-    c.InjectJavascript("/swagger-ui/swagger-hmac.js");
-});
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pagamento API");
+    });
 }
 
 app.UseStaticFiles();

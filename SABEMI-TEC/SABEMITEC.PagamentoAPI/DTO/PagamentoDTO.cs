@@ -2,7 +2,7 @@
 
 namespace SABEMITEC.PagamentoAPI.DTO
 {
-    public class PagamentoDTO
+    public class PagamentoDto
     {
         [JsonPropertyName("id_transacao")]
         public string? IdTransacao { get; set; }
