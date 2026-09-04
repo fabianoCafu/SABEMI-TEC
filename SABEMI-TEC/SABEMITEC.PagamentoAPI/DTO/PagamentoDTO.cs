@@ -11,7 +11,7 @@ namespace SABEMITEC.PagamentoAPI.DTO
         public string? IdContrato { get; set; }
 
         [JsonPropertyName("valor")]
-        public decimal Valor { get; set; } 
+        public decimal? Valor { get; set; } 
 
         [JsonPropertyName("data_pagamento")]
         public DateTime? DataPagamento { get; set; }
