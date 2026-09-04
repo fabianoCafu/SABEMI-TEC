@@ -64,6 +64,7 @@ jobs:
           /d:sonar.token="$SONAR_TOKEN"
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.sourceEncoding="UTF-8"
+          /d:sonar.projectBaseDir="${{ github.workspace }}/SABEMI-TEC"
           /d:sonar.qualitygate.wait="true"
           /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.cobertura.xml"
 
