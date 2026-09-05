@@ -57,6 +57,12 @@ jobs:
       - name: Install SonarScanner
         run: dotnet tool install --global dotnet-sonarscanner
 
+      - name: SonarQube Begin
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          dotnet sonarscanner begin /k:"fabianoCafu_SABEMI-TEC4" /o:"fabianocafu" /d:sonar.token="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.sourceEncoding="UTF-8" /d:sonar.qualitygate.wait="true" /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage.xml"
+
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
 
@@ -64,37 +70,19 @@ jobs:
         run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-incremental
 
       - name: Test and Collect Coverage
-        run: >
-          dotnet test SABEMI-TEC/SABEMI-TEC.sln
-          --no-restore
-          --configuration Release
-          --no-build
-          --collect:"XPlat Code Coverage"
-          --results-directory SABEMI-TEC/TestResults
+        run: |
+          dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage;Format=opencover" --results-directory "${{ github.workspace }}/TestResults"
 
-      - name: Find Coverage File
-        id: coverage
-        run: >
-          REPORT_PATH=$(find SABEMI-TEC/TestResults -name "coverage.cobertura.xml" | head -n 1)
-          echo "Found coverage report at: $REPORT_PATH"
-          echo "path=$REPORT_PATH" >> $GITHUB_OUTPUT
+      - name: Copy Coverage File to Root
+        run: |
+          cp $(find ${{ github.workspace }}/TestResults -name "coverage.opencover.xml" | head -n 1) ${{ github.workspace }}/coverage.xml
+          echo "Arquivo de cobertura copiado com sucesso para a raiz."
 
-      - name: SonarQube Analysis
+      - name: SonarQube End
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: >
-          dotnet sonarscanner begin
-            /k:"fabianoCafu_SABEMI-TEC4"
-            /o:"fabianocafu"\
-            /d:sonar.token="$SONAR_TOKEN"
-            /d:sonar.host.url="https://sonarcloud.io"
-            /d:sonar.sourceEncoding="UTF-8"
-            /d:sonar.qualitygate.wait="true"
-            /d:sonar.cs.opencover.reportsPaths="${{ steps.coverage.outputs.path }}"
-
-          dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-incremental
-          dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
-          
+        run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+        
   nuget:
     name: PUBLISH NUGET
     runs-on: ubuntu-latest
