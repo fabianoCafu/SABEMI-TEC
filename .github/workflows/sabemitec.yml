@@ -77,7 +77,8 @@ jobs:
         
       - name: Test and Collect Coverage
         run: |
-          dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage;Format=opencover" --results-directory "${{ github.workspace }}/TestResults"
+          dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          #dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage;Format=opencover" --results-directory "${{ github.workspace }}/TestResults"
           
       - name: Copy Coverage File to Root
         run: |
