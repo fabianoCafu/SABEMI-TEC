@@ -77,13 +77,39 @@ namespace PagamentoAPITest.Repository
             var repository = new EventoBrutoRepository(context, mockLogger.Object);
 
             // Act
-            var result = await repository.ExistsEventAsync("12345");
+            var result = await repository.ExistsEventAsync("6259847");
 
             // Assert
             Assert.False(result.IsSuccess);
             Assert.True(result.IsFailure);
             Assert.Empty(result.Error!);
             Assert.False(result.Object); 
+        }
+
+        [Fact]
+        public async Task ExistsEventAsync_Deve_RetornarFailure_QuandoOcorrerUmaExceptionAoValidarSeExisteEvento()
+        {
+            // Arrange
+            var mensagem = "Erro interno ao validar se existe evento.";
+            var context = GetInMemoryDbContext();
+            var mockLogger = new Mock<ILogger<EventoBrutoRepository>>();
+            var repository = new EventoBrutoRepository(context, mockLogger.Object);
+            await context.DisposeAsync();
+
+            // Act
+            var result = await repository.ExistsEventAsync("9658473");
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.True(result.IsFailure);
+            Assert.Equal(mensagem, result.Error);
+
+            mockLogger.Verify(x => x.Log(LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Erro ao validar se existe evento.")),
+                It.IsAny<Exception>(),
+                It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
+                Times.Once);
         }
 
         //[Fact]

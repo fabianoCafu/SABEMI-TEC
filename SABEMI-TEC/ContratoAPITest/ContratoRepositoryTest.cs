@@ -7,16 +7,17 @@ using SABEMITEC.ContratoAPI.Repository;
 using SABEMITEC.ContratoAPI.SignalR;
 using Moq;
 
-namespace ContratoAPITests.Repository
+
+namespace ContratoAPITest.Repository
 {
-    public class ContratoRepositoryTests
+    public class ContratoRepositoryTest
     {
         private readonly Mock<IHubContext<PagamentoHub>> _hubContextMock;
         private readonly Mock<IHubClients> _hubClientsMock;
         private readonly Mock<IClientProxy> _clientProxyMock;
         private readonly Mock<ILogger<ContratoRepository>> _loggerMock;
 
-        public ContratoRepositoryTests()
+        public ContratoRepositoryTest()
         {
             _hubContextMock = new Mock<IHubContext<PagamentoHub>>();
             _hubClientsMock = new Mock<IHubClients>();
