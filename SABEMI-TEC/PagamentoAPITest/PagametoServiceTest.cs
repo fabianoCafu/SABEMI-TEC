@@ -26,7 +26,7 @@ namespace PagamentoAPITest
         }
 
         [Fact]
-        public async void CreateEventAsync_Deve_RetornarSucesso_QuandoEventoForPersistidoComSucesso()
+        public async void CreateEventAsync_Deve_RetornarIsSuccess_QuandoEventoForPersistidoComSucesso()
         {
             // Arrange
             var mensagem = "Evento Cadastrado com Sucesso!";
@@ -55,7 +55,7 @@ namespace PagamentoAPITest
         }
 
         [Fact]
-        public async void CreateEventAsync_Deve_RetornarFailure_QuandoPersistirEventoRetornarFalha()
+        public async void CreateEventAsync_Deve_RetornarIsFailure_QuandoPersistirEventoRetornarFalha()
         {
             // Arrange
             var mensagem = "Erro ao persistir o evento.";
@@ -86,7 +86,7 @@ namespace PagamentoAPITest
         }
 
         [Fact]
-        public async void CreateEventAsync_Deve_RetornarFailure_QuandoIdTrancaoOuIdContratoNaoForemValidos()
+        public async void CreateEventAsync_Deve_RetornarIsFailure_QuandoIdTrancaoOuIdContratoNaoForemValidos()
         {
             // Arrange
             var mensagem = "Os atributos 'id_transacao' e 'id_contrato' são obrigaórios!";
@@ -125,7 +125,7 @@ namespace PagamentoAPITest
         }
 
         [Fact]
-        public async void CreateEventAsync_Deve_RetornarFailure_QuandoOhPagamentoJaExistirNoBancoDeDados()
+        public async void CreateEventAsync_Deve_RetornarIsFailure_QuandoOhPagamentoJaExistirNoBancoDeDados()
         {
             // Arrange
             var mensagem = "Pagamento já Processado!";

@@ -22,7 +22,7 @@ namespace ContratoAPITest
         #region Metodo GetListContractAsync
 
         [Fact]
-        public async void GetListContractAsync_Deve_RetornarSucesso_QuandoNaoExistirNenhumStatusContratoCadastrado()
+        public async void GetListContractAsync_Deve_RetornarIsSuccess_QuandoNaoExistirNenhumStatusContratoCadastrado()
         {
             // Arrange
             var mensagem = "Não existe nemhum pagamento Processado!";
@@ -46,7 +46,7 @@ namespace ContratoAPITest
         }
 
         [Fact]
-        public async void GetListContractAsync_Deve_RetornarSucesso_QuandoExistirStatusContratoCadastrado()
+        public async void GetListContractAsync_Deve_RetornarIsSuccess_QuandoExistirStatusContratoCadastrado()
         {
             // Arrange
             var statusContratos = new List<StatusContrato>
@@ -103,7 +103,7 @@ namespace ContratoAPITest
         #region Metodo CreateContractStatusAsync
 
         [Fact]
-        public async Task CreateContractStatusAsync_Deve_RetornarSucesso_QuandoStatusContratoForCadastradoSucesso()
+        public async Task CreateContractStatusAsync_Deve_RetornarIsSuccess_QuandoStatusContratoForCadastradoSucesso()
         {
             // Arrange 
             var mensagem = "StatusContrato cadastrado com Sucesso!";
@@ -128,7 +128,7 @@ namespace ContratoAPITest
         }
 
         [Fact]
-        public async Task CreateContractStatusAsync_Deve_RetornarFailure_QuandoOcorrerUmaFalhaNoCadastro()
+        public async Task CreateContractStatusAsync_Deve_RetornarIsFailure_QuandoOcorrerUmaFalhaNoCadastro()
         {
             // Arrange 
             var mensagem = "Ocorreu um erro interno no servidor.";

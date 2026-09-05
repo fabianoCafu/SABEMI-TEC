@@ -7,7 +7,7 @@ using SABEMITEC.ContratoAPI.Repository;
 using SABEMITEC.ContratoAPI.SignalR;
 using Moq;
 
-namespace SABEMITEC.ContratoAPI.Tests.Repository
+namespace ContratoAPITests.Repository
 {
     public class ContratoRepositoryTests
     {
@@ -42,7 +42,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task GetListContractAsync_DeveRetornarListaDeStatusOrdenadaPorData()
+        public async Task GetListContractAsync_Deve_RetornarIsSucces_QuandoListarStatusContratoOrdenadaPorData()
         {
             // Arrange
             await using var context = CreateContext();
@@ -67,7 +67,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task GetListContractAsync_SemRegistros_DeveRetornarListaVazia()
+        public async Task GetListContractAsync_Deve_RetornarIsSucces_QuandoRetornarUmaListaVazia()
         {
             // Arrange
             await using var context = CreateContext();
@@ -84,7 +84,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task CreateAsync_DeveSalvarStatusContrato()
+        public async Task CreateAsync_Deve_RetornarIsSucces_QuandoOhStatusContratoForSalvoComSucesso()
         {
             // Arrange
             await using var context = CreateContext();
@@ -109,7 +109,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task CreateAsync_DeveNotificarClientesViaSignalR()
+        public async Task CreateAsync_Deve_RetornarUmaNotificaoViaSignalR()
         {
             // Arrange
             await using var context = CreateContext();
@@ -128,7 +128,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task ExistsAsync_ContratoExistente_DeveRetornarSuccessTrue()
+        public async Task ExistsAsync_Deve_RetornarIsSucces_QuandoOhContratoJaExistirNaBaseDeDados()
         {
             // Arrange
             await using var context = CreateContext();
@@ -146,7 +146,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task ExistsAsync_ContratoInexistente_DeveRetornarFailure()
+        public async Task ExistsAsync_Deve_RetornarIsFailure_QuandoOhContratoNaoExistirNaBaseDeDados()
         {
             // Arrange
             await using var context = CreateContext();
@@ -163,7 +163,7 @@ namespace SABEMITEC.ContratoAPI.Tests.Repository
         }
 
         [Fact]
-        public async Task ExistsAsync_MesmaTransacaoContratoDiferente_DeveRetornarFailure()
+        public async Task ExistsAsync_Deve_RetornarIsFailure_QuandoTentarSalvarAhMesmaTransacaoComContratoDiferente()
         {
             // Arrange
             await using var context = CreateContext();

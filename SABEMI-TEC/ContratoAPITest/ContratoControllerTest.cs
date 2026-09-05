@@ -8,13 +8,13 @@ using static SABEMITEC.Shared.PartnerResult;
 
 namespace ContratoAPITest
 {
-    public class ContratoControllerTests
+    public class ContratoControllerTest
     {
         private readonly Mock<IContratoService> _mockContratoService;
         private readonly Mock<ILogger<ContratoController>> _mockLogger;
         private readonly ContratoController _controller;
 
-        public ContratoControllerTests()
+        public ContratoControllerTest()
         {
             _mockContratoService = new Mock<IContratoService>();
             _mockLogger = new Mock<ILogger<ContratoController>>();
