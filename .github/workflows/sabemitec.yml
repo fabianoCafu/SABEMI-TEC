@@ -12,12 +12,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
+          
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
+        
       - name: Build
         run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
         
@@ -29,12 +32,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
+          
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
+        
       - name: Test
         run: dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
         
@@ -48,28 +54,36 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
+          
       - name: Install SonarCloudScanner
         run: dotnet tool install --global dotnet-sonarscanner
+        
       - name: SonarCloud Begin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           dotnet sonarscanner begin /k:"fabianoCafu_SABEMI-TEC4" /o:"fabianocafu" /d:sonar.token="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.sourceEncoding="UTF-8" /d:sonar.qualitygate.wait="true" /d:sonar.coverage.exclusions="**/*.ts" /d:sonar.cs.opencover.reportsPaths="${{ github.workspace }}/coverage.xml"
+          
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln    
+        
       - name: Build
         run: dotnet build SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-incremental
+        
       - name: Test and Collect Coverage
         run: |
           dotnet test SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release --no-build --collect:"XPlat Code Coverage;Format=opencover" --results-directory "${{ github.workspace }}/TestResults"
+          
       - name: Copy Coverage File to Root
         run: |
           cp $(find ${{ github.workspace }}/TestResults -name "coverage.opencover.xml" | head -n 1) ${{ github.workspace }}/coverage.xml
           echo "Arquivo de cobertura copiado com sucesso para a raiz."
+          
       - name: SonarCloud End
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -83,11 +97,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
+          
       - name: Restore
         run: dotnet restore SABEMI-TEC/SABEMI-TEC.sln
+        
       - name: Pack
         run: dotnet pack SABEMI-TEC/SABEMI-TEC.sln --no-restore --configuration Release
