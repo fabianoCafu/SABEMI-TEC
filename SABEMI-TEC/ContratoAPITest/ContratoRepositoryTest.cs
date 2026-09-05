@@ -7,8 +7,7 @@ using SABEMITEC.ContratoAPI.Repository;
 using SABEMITEC.ContratoAPI.SignalR;
 using Moq;
 
-
-namespace ContratoAPITest.Repository
+namespace SABEMITEC.ContratoAPI.Test.Repository
 {
     public class ContratoRepositoryTest
     {

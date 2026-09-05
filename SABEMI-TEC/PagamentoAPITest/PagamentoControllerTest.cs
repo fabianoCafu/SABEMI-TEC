@@ -7,7 +7,7 @@ using SABEMITEC.PagamentoAPI.Service;
 using SABEMITEC.PagamentoAPI.Controller;
 using static SABEMITEC.Shared.PartnerResult;
 
-namespace PagamentoAPITest
+namespace SABEMITEC.PagamentoAPI.Test.Controllers
 {
     public class PagamentoControllerTest
     {

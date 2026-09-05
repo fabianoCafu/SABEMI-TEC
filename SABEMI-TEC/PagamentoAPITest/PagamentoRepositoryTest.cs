@@ -5,7 +5,7 @@ using SABEMITEC.PagamentoAPI.Model;
 using SABEMITEC.PagamentoAPI.Repository;
 using Moq;
 
-namespace PagamentoAPITest.Repository
+namespace SABEMITEC.PagamentoAPI.Test.Repository
 {
     public class PagamentoRepositoryTest
     {

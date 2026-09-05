@@ -6,7 +6,8 @@ using SABEMITEC.ContratoAPI.Service;
 using SABEMITEC.Shared.Event;
 using static SABEMITEC.Shared.PartnerResult;
 
-namespace ContratoAPITest
+
+namespace SABEMITEC.ContratoAPI.Test.Service
 {
     public class ContratoServiceTest
     {

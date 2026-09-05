@@ -6,7 +6,7 @@ using SABEMITEC.ContratoAPI.Service;
 using SABEMITEC.ContratoAPI.Controllers;
 using static SABEMITEC.Shared.PartnerResult;
 
-namespace ContratoAPITest
+namespace SABEMITEC.ContratoAPI.Test.Controlles
 {
     public class ContratoControllerTest
     {
