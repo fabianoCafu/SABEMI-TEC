@@ -69,15 +69,23 @@ namespace SABEMITEC.PagamentoAPI.Service
                 var payload = ValidatePayload(JsonDocument.Parse(grossEvent.Payload)); 
                 var newGrossEvent = await _eventoBrutoRepository.CreateAsync(grossEvent);
 
-                if (newGrossEvent.IsSuccess)
-                {
-                    await PublishRabbitMQMessage(payload, payment);
-                    return Result<bool>.Success(true);
-                }
-                else
-                {
-                    return Result<bool>.Failure(newGrossEvent.Error!);
-                }   
+                return await ValidateRawEventCreation(newGrossEvent, payload, payment);
+            }
+        }
+
+        private async Task<Result<Boolean>> ValidateRawEventCreation(
+            Result<EventoBruto> newGrossEvent,
+            Result<Boolean> payload,
+            PagamentoDto payment)
+        {
+            if (newGrossEvent.IsSuccess)
+            {
+                await PublishRabbitMQMessage(payload, payment);
+                return Result<bool>.Success(true);
+            }
+            else
+            {
+                return Result<bool>.Failure(newGrossEvent.Error!);
             }
         }
 
