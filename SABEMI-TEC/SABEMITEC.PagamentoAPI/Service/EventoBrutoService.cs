@@ -68,8 +68,9 @@ namespace SABEMITEC.PagamentoAPI.Service
 
                 var payload = ValidatePayload(JsonDocument.Parse(grossEvent.Payload)); 
                 var newGrossEvent = await _eventoBrutoRepository.CreateAsync(grossEvent);
+                var result = await ValidateRawEventCreation(newGrossEvent, payload, payment);
 
-                return await ValidateRawEventCreation(newGrossEvent, payload, payment);
+                return result;
             }
         }
 
