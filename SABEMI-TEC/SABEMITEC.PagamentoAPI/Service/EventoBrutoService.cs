@@ -78,14 +78,22 @@ namespace SABEMITEC.PagamentoAPI.Service
             Result<Boolean> payload,
             PagamentoDto payment)
         {
-            if (newGrossEvent.IsSuccess)
+            try
             {
-                await PublishRabbitMQMessage(payload, payment);
-                return Result<bool>.Success(true);
+                if (newGrossEvent.IsSuccess)
+                {
+                    await PublishRabbitMQMessage(payload, payment);
+                    return Result<bool>.Success(true);
+                }
+                else
+                {
+                    return Result<bool>.Failure(newGrossEvent.Error!);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return Result<bool>.Failure(newGrossEvent.Error!);
+                _logger.LogError(ex, "Erro ao validar a criação de um EventoBruto.");
+                return Result<bool>.Failure("Ocorreu um erro interno no servidor.");
             }
         }
 
