@@ -90,7 +90,7 @@ namespace SABEMITEC.PagamentoAPI.Service
         }
 
         private async Task PublishRabbitMQMessage(
-            Result<bool> payload,
+            Result<Boolean> payload,
             PagamentoDto payment)
         {
             var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:status-contrato"));
@@ -105,7 +105,7 @@ namespace SABEMITEC.PagamentoAPI.Service
             }
         }
 
-        private Result<bool> ValidatePayload(JsonDocument payload)
+        private Result<Boolean> ValidatePayload(JsonDocument payload)
         {
             try
             {
