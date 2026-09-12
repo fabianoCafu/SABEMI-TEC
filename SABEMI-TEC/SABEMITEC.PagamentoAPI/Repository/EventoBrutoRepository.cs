@@ -41,10 +41,10 @@ namespace SABEMITEC.PagamentoAPI.Repository
                 var paymentExists = await _context.LogEventosBruto!
                                                   .FromSqlInterpolated(GetEventoBrutoByIdTransacaoQuery(idTransacao))
                                                   .AsNoTracking()
-                                                  .CountAsync();
+                                                  .AnyAsync();
 
-                return (paymentExists > 0) 
-                    ? Result<bool>.Success(true) 
+                return paymentExists
+                    ? Result<bool>.Success(true)
                     : Result<bool>.Failure(string.Empty);
 
             }
