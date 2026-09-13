@@ -81,7 +81,7 @@ namespace SABEMITEC.ContratoAPI.Test.Service
             // Arrange 
             var mensagem = "Ocorreu um erro interno no servidor.";
             _mockContratoRepository.Setup(r => r.GetListContractAsync())
-                                    .ThrowsAsync(new Exception(string.Empty));
+                                   .ThrowsAsync(new Exception(string.Empty));
 
             var contratoService = new ContratoService(_mockContratoRepository.Object, _mockLogger.Object);
 
@@ -136,7 +136,7 @@ namespace SABEMITEC.ContratoAPI.Test.Service
             var eventoStatusContrato = new EventoStatusContrato("000001", "368547", "SUCESSO", "");
 
             _mockContratoRepository.Setup(x => x.CreateAsync(It.IsAny<StatusContrato>()))
-                                                .ThrowsAsync(new Exception(mensagem));
+                                   .ThrowsAsync(new Exception(mensagem));
                                    
 
             var contratoService = new ContratoService(_mockContratoRepository.Object, _mockLogger.Object);

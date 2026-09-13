@@ -93,8 +93,8 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
 
             var pagamentoDto = new PagamentoDto
             {
-                IdTransacao = "",
-                IdContrato = "",
+                IdTransacao = string.Empty,
+                IdContrato = string.Empty,
                 Valor = 100.00M,
                 DataPagamento = DateTime.Now,
                 Status = "PARCELAMENTO"
@@ -136,7 +136,7 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
                                       .ReturnsAsync(Result<EventoBruto>.Failure(mensagem));
 
             _mockEventoBrutoRepository.Setup(x => x.ExistsEventAsync(It.IsAny<string>()))
-                                    .ReturnsAsync(Result<bool>.Success(true));
+                                      .ReturnsAsync(Result<bool>.Success(true));
 
             _mockSendEndpointProvider.Setup(x => x.GetSendEndpoint(It.IsAny<Uri>()))
                                      .ReturnsAsync(_mockSendEndpoint.Object);

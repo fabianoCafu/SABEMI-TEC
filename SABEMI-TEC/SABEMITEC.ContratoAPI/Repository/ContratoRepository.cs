@@ -66,10 +66,10 @@ namespace SABEMITEC.ContratoAPI.Repository
                 var contractExists = await _context.StatusContrato!
                                                    .Where(c => c.IdTransacao == idTransacao && c.IdContrato == idContrato)
                                                    .AsNoTracking()
-                                                   .CountAsync();
+                                                   .AnyAsync();
 
-                return (contractExists > 0)
-                    ? Result<bool>.Success(true)
+                return contractExists
+                    ? Result<bool>.Success(contractExists)
                     : Result<bool>.Failure(string.Empty);
 
             }

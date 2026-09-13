@@ -2,7 +2,7 @@
 {
     public class StatusContrato
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
         public string? IdTransacao { get; set; }
         public string ? IdContrato { get; set; }
         public string? Status { get; set; }

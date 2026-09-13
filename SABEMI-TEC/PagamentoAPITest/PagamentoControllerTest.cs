@@ -34,6 +34,7 @@ namespace SABEMITEC.PagamentoAPI.Test.Controllers
             // Assert
             var badRequestResult = Assert.IsType<BadRequestResult>(result);
             Assert.Equal(400, badRequestResult.StatusCode);
+
             _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()), Times.Never);
         }
 
@@ -90,6 +91,7 @@ namespace SABEMITEC.PagamentoAPI.Test.Controllers
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(500, statusCodeResult.StatusCode);
             Assert.Equal(mensagem, statusCodeResult.Value);
+
             _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()),Times.Once);
         }
     }

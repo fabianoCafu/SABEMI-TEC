@@ -111,33 +111,5 @@ namespace SABEMITEC.PagamentoAPI.Test.Repository
                 It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
                 Times.Once);
         }
-
-        //[Fact]
-        //public async Task ExistsEventAsync_Deve_RetornarIsSuccess_QuandoOhEventoBrutoExistirNoBancoNoBancoDeDados()
-        //{
-        //    // Arrange
-        //    var mockLogger = new Mock<ILogger<EventoBrutoRepository>>();
-        //    var mockContext = new Mock<SqlSeverContextPagamento>();
-        //    var dadosFicticios = new List<EventoBruto>()
-        //    {
-        //        new EventoBruto
-        //        {
-        //            Id = Guid.NewGuid(),
-        //            Payload = "{\"id_transacao\":\"000005\",\"id_contrato\":\"3265847\",\"valor\":130.55,\"data_pagamento\":\"2025-08-08T00:00:00\",\"status\":\"PARCELADO\"}",
-        //            DataRecebimento = DateTime.Now
-        //        }
-        //    };
-
-        //    mockContext.Setup(c => c.LogEventosBruto).ReturnsDbSet(dadosFicticios);
-        //    var repository = new EventoBrutoRepository(mockContext.Object, mockLogger.Object);
-
-        //    // Act
-        //    var result = await repository.ExistsEventAsync("000005");
-
-        //    // Assert
-        //    Assert.True(result.IsSuccess);
-        //    Assert.False(result.IsFailure);
-        //    Assert.True(result.Object);
-        //}
     }
 }

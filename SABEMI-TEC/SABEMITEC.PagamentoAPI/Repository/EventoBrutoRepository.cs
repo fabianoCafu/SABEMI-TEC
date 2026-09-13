@@ -22,7 +22,7 @@ namespace SABEMITEC.PagamentoAPI.Repository
         {
             try
             {
-                 _context.LogEventosBruto!.Add(eventoBruto);
+                _context.LogEventosBruto!.Add(eventoBruto);
                 await _context.SaveChangesAsync();
 
                 return Result<EventoBruto>.Success(eventoBruto);

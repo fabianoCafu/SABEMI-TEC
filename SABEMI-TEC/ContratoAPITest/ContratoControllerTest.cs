@@ -69,7 +69,7 @@ namespace SABEMITEC.ContratoAPI.Test.Controlles
             // Arrange
             var mensagem = "Ocorreu um erro interno no servidor.";
            _mockContratoService.Setup(x => x.GetListContractAsync())
-                                .ReturnsAsync(Result<List<StatusContrato>>.Failure(mensagem));
+                               .ReturnsAsync(Result<List<StatusContrato>>.Failure(mensagem));
 
             // Act
             var result = await _controller.PagamentosProcessados();
