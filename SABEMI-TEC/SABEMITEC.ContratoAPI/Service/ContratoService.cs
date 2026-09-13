@@ -35,7 +35,7 @@ namespace SABEMITEC.ContratoAPI.Service
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao atualizar o StatusContrato.");
+                _logger.LogError(ex, "Erro ao listar o StatusContrato.");
                 return Result<List<StatusContrato>>.Failure("Ocorreu um erro interno no servidor.");
             }
         }
@@ -51,7 +51,7 @@ namespace SABEMITEC.ContratoAPI.Service
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao atualizar o StatusContrato.");
+                _logger.LogError(ex, "Erro ao criar o StatusContrato.");
                 return Result<EventoStatusContrato>.Failure("Ocorreu um erro interno no servidor.");
             }
         }
