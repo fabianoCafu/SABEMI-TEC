@@ -29,8 +29,8 @@ namespace SABEMITEC.PagamentoAPI.Repository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao cadastra um Evento Bruto no banco.");
-                return Result<EventoBruto>.Failure("Erro interno ao receber o evento.");  
+                _logger.LogError(ex, "Erro ao cadastra EventoBruto no banco.");
+                return Result<EventoBruto>.Failure("Erro interno ao criar um EventoBruto.");  
             }
         }
 
@@ -50,8 +50,8 @@ namespace SABEMITEC.PagamentoAPI.Repository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao validar se existe evento.");
-                return Result<bool>.Failure("Erro interno ao validar se existe evento.");
+                _logger.LogError(ex, "Erro ao validar se existe EventoBruto.");
+                return Result<bool>.Failure("Erro interno ao validar se existe EventoBruto.");
             }
         }
 

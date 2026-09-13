@@ -35,8 +35,8 @@ namespace SABEMITEC.ContratoAPI.Repository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao atualizar um StatusContrato.");
-                return Result<List<StatusContrato>>.Failure("Erro interno ao lista  Status do Contrato.");
+                _logger.LogError(ex, "Erro ao obter uma lista de StatusContrato.");
+                return Result<List<StatusContrato>>.Failure("Erro interno ao listar Status do Contrato.");
             }
         }
 
@@ -52,8 +52,8 @@ namespace SABEMITEC.ContratoAPI.Repository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao atualizar um StatusContrato.");
-                return Result<StatusContrato>.Failure("Erro interno ao atualizar o StatusContrato.");
+                _logger.LogError(ex, "Erro ao criar um StatusContrato.");
+                return Result<StatusContrato>.Failure("Erro interno ao criar o StatusContrato.");
             }
         }
 
@@ -75,8 +75,8 @@ namespace SABEMITEC.ContratoAPI.Repository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao validar se existe Contrato.");
-                return Result<bool>.Failure("Erro interno ao validar se existe Contrato.");
+                _logger.LogError(ex, "Erro ao validar se existe StatusContrato.");
+                return Result<bool>.Failure("Erro interno ao validar se existe StatusContrato.");
             }
         }
     }

@@ -84,6 +84,40 @@ namespace SABEMITEC.ContratoAPI.Test.Repository
         }
 
         [Fact]
+        public async Task CreateAsync_Deve_RetornarIsFailure_QuandoOcorrerUmaExceptionAoObterUmaListaDeStatusContrato()
+        {
+            // Arrange
+            var mensagem = "Erro interno ao listar Status do Contrato.";
+            var options = new DbContextOptionsBuilder<SqlSeverContextContrato>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+            var contextMock = new Mock<SqlSeverContextContrato>(options);
+
+            contextMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
+                       .ThrowsAsync(new Exception(mensagem));
+
+            var repository = new ContratoRepository(_hubContextMock.Object, contextMock.Object, _loggerMock.Object);
+            var statusContrato = ObterlistaStatusContrato()[0];
+
+            // Act
+            var result = await repository.GetListContractAsync();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.True(result.IsFailure);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(mensagem, result.Error);
+
+            _loggerMock.Verify(x => x.Log(LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Erro ao obter uma lista de StatusContrato.")),
+                It.IsAny<Exception>(),
+                It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
+                Times.Once);
+
+            _clientProxyMock.Verify(x => x.SendCoreAsync("PagamentoAtualizado", It.IsAny<object?[]>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
+
+        [Fact]
         public async Task CreateAsync_Deve_RetornarIsSucces_QuandoOhStatusContratoForSalvoComSucesso()
         {
             // Arrange
@@ -125,6 +159,40 @@ namespace SABEMITEC.ContratoAPI.Test.Repository
             // Assert
             Assert.True(result.IsSuccess);
             _clientProxyMock.Verify(x => x.SendCoreAsync("PagamentoAtualizado", It.IsAny<object?[]>(), It.IsAny<CancellationToken>()),Times.Once);
+        }
+
+        [Fact]
+        public async Task CreateAsync_Deve_RetornarIsFailure_QuandoOcorrerUmaExceptionAoSalvarUmStatusContrato()
+        {
+            // Arrange
+            var mensagem = "Erro interno ao criar o StatusContrato.";
+            var options = new DbContextOptionsBuilder<SqlSeverContextContrato>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+            var contextMock = new Mock<SqlSeverContextContrato>(options);
+
+            contextMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
+                       .ThrowsAsync(new Exception(mensagem));
+
+            var repository = new ContratoRepository(_hubContextMock.Object, contextMock.Object, _loggerMock.Object);
+            var statusContrato = ObterlistaStatusContrato()[0];
+
+            // Act
+            var result = await repository.CreateAsync(statusContrato);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.True(result.IsFailure);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(mensagem, result.Error);
+
+            _loggerMock.Verify(x => x.Log(LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Erro ao criar um StatusContrato.")),
+                It.IsAny<Exception>(),
+                It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
+                Times.Once);
+
+            _clientProxyMock.Verify(x => x.SendCoreAsync("PagamentoAtualizado", It.IsAny<object?[]>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
         [Fact]
@@ -178,6 +246,40 @@ namespace SABEMITEC.ContratoAPI.Test.Repository
             Assert.False(result.IsSuccess);
             Assert.Null(result.Message);
             Assert.True(result.IsFailure);
+        }
+
+        [Fact]
+        public async Task ExistsAsync_Deve_RetornarIsFailure_QuandoOcorrerUmaExceptionAoValidarSeStatusContratoExisteNaBaseDeDados()
+        {
+            // Arrange
+            var mensagem = "Erro interno ao validar se existe StatusContrato.";
+            var options = new DbContextOptionsBuilder<SqlSeverContextContrato>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+            var contextMock = new Mock<SqlSeverContextContrato>(options);
+
+            contextMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
+                       .ThrowsAsync(new Exception(mensagem));
+
+            var repository = new ContratoRepository(_hubContextMock.Object, contextMock.Object, _loggerMock.Object);
+            var statusContrato = ObterlistaStatusContrato()[0];
+
+            // Act
+            var result = await repository.ExistsAsync("000023", "5632587");
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.True(result.IsFailure);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(mensagem, result.Error);
+
+            _loggerMock.Verify(x => x.Log(LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Erro ao validar se existe StatusContrato.")),
+                It.IsAny<Exception>(),
+                It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
+                Times.Once);
+
+            _clientProxyMock.Verify(x => x.SendCoreAsync("PagamentoAtualizado", It.IsAny<object?[]>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
         #region Metodos Private
