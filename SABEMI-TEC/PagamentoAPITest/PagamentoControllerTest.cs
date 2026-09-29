@@ -23,17 +23,17 @@ namespace SABEMITEC.PagamentoAPI.Test.Controllers
         }
 
         [Fact]
-        public async Task Pagamento_Deve_RetornarBadRequest400_QuandoPagamentoDtoForNull()
+        public async Task Pagamento_Deve_RetornarNotFound404_QuandoPagamentoDtoForNull()
         {
             // Arrange
             PagamentoDto? pagamentoDto = null;
 
             // Act
             var result = await _controller.Pagamento(pagamentoDto!);
-
+            
             // Assert
-            var badRequestResult = Assert.IsType<BadRequestResult>(result);
-            Assert.Equal(400, badRequestResult.StatusCode);
+            var badRequestResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(404, badRequestResult.StatusCode);
 
             _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()), Times.Never);
         }

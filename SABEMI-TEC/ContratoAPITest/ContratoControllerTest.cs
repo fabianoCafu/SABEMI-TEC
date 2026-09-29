@@ -45,7 +45,7 @@ namespace SABEMITEC.ContratoAPI.Test.Controlles
         }
 
         [Fact]
-        public async void PagamentosProcessados_Deve_Retornar_OK200_QuandoNaoExistirNenhumStatusContratoCadastrado()
+        public async void PagamentosProcessados_Deve_Retornar_NotFound404_QuandoNaoExistirNenhumStatusContratoCadastrado()
         {
             // Arrange
              var mensagem = "Não existe nemhum pagamento Processado!";
@@ -56,8 +56,8 @@ namespace SABEMITEC.ContratoAPI.Test.Controlles
             var result = await _controller.PagamentosProcessados();
 
             // Assert
-            var createResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(200, createResult.StatusCode);
+            var createResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(404, createResult.StatusCode);
             Assert.Equal(mensagem, createResult.Value);
 
             _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
