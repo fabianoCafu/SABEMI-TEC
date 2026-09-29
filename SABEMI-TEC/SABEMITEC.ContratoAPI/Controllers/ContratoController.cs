@@ -32,8 +32,8 @@ namespace SABEMITEC.ContratoAPI.Controllers
                 else
                 {
                     if (result.Object is null)
-                    {
-                        return Ok(result.Message);
+                    {    
+                        return NotFound(result.Message);
                     }
                     else
                     {

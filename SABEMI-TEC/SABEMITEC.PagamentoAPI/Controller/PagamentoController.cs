@@ -27,7 +27,7 @@ namespace SABEMITEC.PagamentoAPI.Controller
             {
                 if (pagamentoDto is null)
                 {
-                    return BadRequest();
+                    return NotFound("Dados do Pagamento não informado!");
                 }
 
                 var eventoBruto = new EventoBruto(pagamentoDto);
