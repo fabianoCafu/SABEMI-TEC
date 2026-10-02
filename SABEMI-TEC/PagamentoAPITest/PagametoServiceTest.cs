@@ -241,7 +241,6 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
             Assert.Equal(mensagem, resultado.Error);
         }
 
-
         [Fact]
         public void ValidatePayload_DeveRetornarFalha_QuandoForGeradaUmaExcecaoAoValidarPayload()
         {

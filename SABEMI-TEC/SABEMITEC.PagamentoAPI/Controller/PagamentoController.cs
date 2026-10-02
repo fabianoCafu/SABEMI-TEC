@@ -24,10 +24,11 @@ namespace SABEMITEC.PagamentoAPI.Controller
                 return NotFound("Dados do Pagamento não informado!");
             }
 
-            var eventoBruto = new EventoBruto(pagamentoDto);
-            var result = await _eventoBrutoService.CreateEventAsync(eventoBruto);
+            var result = await _eventoBrutoService.CreateEventAsync(new EventoBruto(pagamentoDto));
 
-            return (result.IsFailure) ? BadRequest(result.Error) : Ok("Cadastro realizado com Sucesso!");
+            return (result.IsFailure) 
+                ? BadRequest(result.Error) 
+                : Ok("Cadastro realizado com Sucesso!");
         }
     }
 }

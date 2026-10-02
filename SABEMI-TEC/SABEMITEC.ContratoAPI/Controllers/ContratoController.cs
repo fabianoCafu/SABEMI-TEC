@@ -23,10 +23,10 @@ namespace SABEMITEC.ContratoAPI.Controllers
             {
                 return BadRequest(result.Error);
             }
-            else
-            {
-                return (result.Object is null) ? NotFound(result.Message) : Ok(result);
-            }
+            
+            return (result.Object is null) 
+                ? NotFound(result.Message) 
+                : Ok(result); 
         }
     }
 }

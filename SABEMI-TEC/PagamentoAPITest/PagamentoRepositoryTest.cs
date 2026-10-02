@@ -11,7 +11,6 @@ namespace SABEMITEC.PagamentoAPI.Test.Repository
 {
     public class PagamentoRepositoryTest
     {
-
         private readonly Mock<IHubContext<PagamentoHub>> _hubContextMock;
         private readonly Mock<IHubClients> _hubClientsMock;
         private readonly Mock<IClientProxy> _clientProxyMock;
