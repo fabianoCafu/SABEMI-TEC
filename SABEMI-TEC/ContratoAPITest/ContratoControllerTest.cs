@@ -18,7 +18,7 @@ namespace SABEMITEC.ContratoAPI.Test.Controlles
         {
             _mockContratoService = new Mock<IContratoService>();
             _mockLogger = new Mock<ILogger<ContratoController>>();
-            _controller = new ContratoController(_mockContratoService.Object, _mockLogger.Object);
+            _controller = new ContratoController(_mockContratoService.Object);
         }
 
         #region EndPointt pagamentos-processados
