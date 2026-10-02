@@ -241,6 +241,26 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
             Assert.Equal(mensagem, resultado.Error);
         }
 
+
+        [Fact]
+        public void ValidatePayload_DeveRetornarFalha_QuandoForGeradaUmaExcecaoAoValidarPayload()
+        {
+            // Arrange 
+            var mensagem = "Ocorreu um erro interno no servidor.";
+            var json = "{ \"data_pagamento\": \"2026-03-02\", \"status\": \"Pago\" }";
+            using var payload = JsonDocument.Parse(json);
+
+            var eventoBrutoService = new EventoBrutoService(_mockEventoBrutoRepository.Object, _mockSendEndpointProvider.Object, _mockLogger.Object);
+            var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            // Act
+            var resultado = (Result<bool>)metodoPrivado!.Invoke(eventoBrutoService, new object[] { payload })!;
+
+            // Assert
+            Assert.False(resultado.IsSuccess);
+            Assert.Equal(mensagem, resultado.Error);
+        }
+
         #region Metodos Privates
         private static PagamentoDto PagamentoDtoPayloadComSucesso()
         {
