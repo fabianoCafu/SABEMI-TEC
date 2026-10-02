@@ -184,6 +184,63 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
 
         }
 
+        [Fact]
+        public void ValidatePayload_DeveRetornarFalha_QuandoValorForMenorOuIgualAZero()
+        {
+            // Arrange
+            var mensagem = "O atributo 'valor' deve ser maior que 0!";
+            var json = "{ \"valor\": 0, \"data_pagamento\": \"2026-03-02\", \"status\": \"PARCELAMENTO\" }";
+            using var payload = JsonDocument.Parse(json);
+
+            var eventoBrutoService = new EventoBrutoService(_mockEventoBrutoRepository.Object, _mockSendEndpointProvider.Object, _mockLogger.Object);
+            var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            // Act
+            var resultado = (Result<bool>)metodoPrivado.Invoke(eventoBrutoService, new object[] { payload });
+
+            // Assert
+            Assert.False(resultado!.IsSuccess);
+            Assert.Equal(mensagem, resultado.Error);
+        }
+
+        [Fact]
+        public void ValidatePayload_DeveRetornarFalha_QuandoAhDataPagamentoNaoForInformada()
+        {
+            // Arrange
+            var mensagem = "O atributo 'data_pagamento' é obrigatório!";
+            var json = "{ \"valor\": 200.50, \"data_pagamento\": null, \"status\": \"QUITAÇÃO\" }";
+            using var payload = JsonDocument.Parse(json);
+
+            var eventoBrutoService = new EventoBrutoService(_mockEventoBrutoRepository.Object, _mockSendEndpointProvider.Object, _mockLogger.Object);
+            var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            // Act
+            var resultado = (Result<bool>)metodoPrivado.Invoke(eventoBrutoService, new object[] { payload });
+
+            // Assert
+            Assert.False(resultado!.IsSuccess);
+            Assert.Equal(mensagem, resultado.Error);
+        }
+
+        [Fact]
+        public void ValidatePayload_DeveRetornarFalha_QuandoOhStatusNaoForInformada()
+        {
+            // Arrange
+            var mensagem = "O atributo 'status' é obrigatório!";
+            var json = "{ \"valor\": 980.55, \"data_pagamento\": \"\", \"status\": null }";
+            using var payload = JsonDocument.Parse(json);
+
+            var eventoBrutoService = new EventoBrutoService(_mockEventoBrutoRepository.Object, _mockSendEndpointProvider.Object, _mockLogger.Object);
+            var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            // Act
+            var resultado = (Result<bool>)metodoPrivado.Invoke(eventoBrutoService, new object[] { payload });
+
+            // Assert
+            Assert.False(resultado!.IsSuccess);
+            Assert.Equal(mensagem, resultado.Error);
+        }
+
         #region Metodos Privates
         private static PagamentoDto PagamentoDtoPayloadComSucesso()
         {
