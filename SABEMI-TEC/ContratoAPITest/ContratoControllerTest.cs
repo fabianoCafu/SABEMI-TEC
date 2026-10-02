@@ -1,9 +1,9 @@
-﻿using Moq;
-using Microsoft.AspNetCore.Mvc;
-using SABEMITEC.ContratoAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SABEMITEC.ContratoAPI.Service;
+using Moq;
 using SABEMITEC.ContratoAPI.Controllers;
+using SABEMITEC.ContratoAPI.Models;
+using SABEMITEC.ContratoAPI.Service;
 using static SABEMITEC.Shared.PartnerResult;
 
 namespace SABEMITEC.ContratoAPI.Test.Controlles
@@ -82,25 +82,21 @@ namespace SABEMITEC.ContratoAPI.Test.Controlles
             _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
         }
 
-        //[Fact]
-        //public async Task PagamentosProcessados_Deve_Retornar_InternalServerError500_QuandoOcorrerUmaException()
-        //{
-        //    // Arrange
-        //    var mensagem = "Ocorreu um erro interno no servidor.";
-        //    _mockContratoService.Setup(x => x.GetListContractAsync())
-        //                        .ThrowsAsync(new Exception("Internal Server Error"));
+        [Fact]
+        public async Task Pagamento_Deve_Retornar500_QuandoOcorrerUmaException()
+        {
+            // Arrange
+            var mensagem = "Ocorreu um erro interno no servidor.";
+            _mockContratoService.Setup(x => x.GetListContractAsync())
+                                .ThrowsAsync(new Exception(mensagem));
 
-        //    // Act
-        //    var result = await _controller.PagamentosProcessados();
+            // Act
+            var exception = await Assert.ThrowsAsync<Exception>(() => _controller.PagamentosProcessados());
 
-        //    // Assert
-        //    var statusCodeResult = Assert.IsType<ObjectResult>(result);
-
-        //    Assert.Equal(500, statusCodeResult.StatusCode);
-        //    Assert.Equal(mensagem, statusCodeResult.Value);
-
-        //    _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
-        //}
+            // Assert
+            Assert.Equal(mensagem, exception.Message);
+            _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
+        }
 
         #endregion
     }

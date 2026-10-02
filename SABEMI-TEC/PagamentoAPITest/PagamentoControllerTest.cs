@@ -1,10 +1,9 @@
-﻿using Moq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Moq;
+using SABEMITEC.PagamentoAPI.Controller;
 using SABEMITEC.PagamentoAPI.DTO;
-using Microsoft.Extensions.Logging;
 using SABEMITEC.PagamentoAPI.Model;
 using SABEMITEC.PagamentoAPI.Service;
-using SABEMITEC.PagamentoAPI.Controller;
 using static SABEMITEC.Shared.PartnerResult;
 
 namespace SABEMITEC.PagamentoAPI.Test.Controllers
@@ -74,23 +73,20 @@ namespace SABEMITEC.PagamentoAPI.Test.Controllers
             _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()), Times.Once);
         }
 
-        //[Fact]
-        //public async Task Pagamento_Deve_Retornar500_QuandoOcorrerUmaException()
-        //{
-        //    // Arrange 
-        //    var mensagem = "Ocorreu um erro interno no servidor.";
-        //    _mockEventoBrutoService.Setup(x => x.CreateEventAsync(It.IsAny<EventoBruto>()))
-        //                           .ThrowsAsync(new Exception(mensagem));
+        [Fact]
+        public async Task Pagamento_Deve_Retornar500_QuandoOcorrerUmaException()
+        {
+            // Arrange
+            var mensagem = "Ocorreu um erro interno no servidor.";
+            _mockEventoBrutoService.Setup(x => x.CreateEventAsync(It.IsAny<EventoBruto>()))
+                .ThrowsAsync(new Exception(mensagem));
 
-        //    // Act
-        //    var result = await _controller.Pagamento(new PagamentoDto());
+            // Act
+            var exception = await Assert.ThrowsAsync<Exception>(() => _controller.Pagamento(new PagamentoDto()));
 
-        //    // Assert
-        //    var statusCodeResult = Assert.IsType<ObjectResult>(result);
-        //    Assert.Equal(500, statusCodeResult.StatusCode);
-        //    Assert.Equal(mensagem, statusCodeResult.Value);
-
-        //    _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()),Times.Once);
-        //}
+            // Assert
+            Assert.Equal(mensagem, exception.Message);
+            _mockEventoBrutoService.Verify(x => x.CreateEventAsync(It.IsAny<EventoBruto>()), Times.Once);
+        }
     }
 }
