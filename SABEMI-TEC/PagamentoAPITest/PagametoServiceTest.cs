@@ -196,7 +196,7 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
             var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
             // Act
-            var resultado = (Result<bool>)metodoPrivado.Invoke(eventoBrutoService, new object[] { payload });
+            var resultado = (Result<bool>)metodoPrivado!.Invoke(eventoBrutoService, new object[] { payload })!;
 
             // Assert
             Assert.False(resultado!.IsSuccess);
@@ -215,7 +215,7 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
             var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
             // Act
-            var resultado = (Result<bool>)metodoPrivado.Invoke(eventoBrutoService, new object[] { payload });
+            var resultado = (Result<bool>)metodoPrivado!.Invoke(eventoBrutoService, new object[] { payload })!;
 
             // Assert
             Assert.False(resultado!.IsSuccess);
@@ -234,7 +234,7 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
             var metodoPrivado = typeof(EventoBrutoService).GetMethod("ValidatePayload", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
             // Act
-            var resultado = (Result<bool>)metodoPrivado.Invoke(eventoBrutoService, new object[] { payload });
+            var resultado = (Result<bool>)metodoPrivado!.Invoke(eventoBrutoService, new object[] { payload })!;
 
             // Assert
             Assert.False(resultado!.IsSuccess);
