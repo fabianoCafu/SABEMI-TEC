@@ -11,8 +11,7 @@ namespace SABEMITEC.PagamentoAPI.Controller
     {
         private readonly IEventoBrutoService _eventoBrutoService;
         
-        public PagamentoController(
-            IEventoBrutoService eventoBrutoService)
+        public PagamentoController(IEventoBrutoService eventoBrutoService)
         {
             _eventoBrutoService = eventoBrutoService;
         }
@@ -20,7 +19,6 @@ namespace SABEMITEC.PagamentoAPI.Controller
         [HttpPost("pagamento")] 
         public async Task<IActionResult> Pagamento([FromBody] PagamentoDto pagamentoDto)
         {
-            
             if (pagamentoDto is null)
             {
                 return NotFound("Dados do Pagamento não informado!");

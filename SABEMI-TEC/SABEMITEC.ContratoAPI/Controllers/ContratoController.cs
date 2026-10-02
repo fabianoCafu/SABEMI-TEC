@@ -8,14 +8,10 @@ namespace SABEMITEC.ContratoAPI.Controllers
     public class ContratoController : ControllerBase
     {
         private readonly IContratoService _contratoService;
-        private readonly ILogger<ContratoController> _logger;
-
-        public ContratoController(
-            IContratoService contratoService,
-            ILogger<ContratoController> logger)
+        
+        public ContratoController(IContratoService contratoService)
         {
-            _contratoService = contratoService;
-            _logger = logger;  
+            _contratoService = contratoService; 
         }
 
         [HttpGet("pagamentos-processados")]
