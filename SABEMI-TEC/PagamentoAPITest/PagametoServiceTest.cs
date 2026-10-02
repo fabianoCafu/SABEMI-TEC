@@ -154,6 +154,36 @@ namespace SABEMITEC.PagamentoAPI.Test.Service
             Assert.Equal(mensagem, result.Error);
         }
 
+        [Fact]
+        public async void CreateEventAsync_Deve_RetornarIsFailure_QuandoUmaExcecaoForGeradaAoCriaUmNovoEvento()
+        {
+            // Arrange
+            var eventoBruto = new EventoBruto();
+            var mensagem = "Ocorreu um erro interno no servidor.";
+            
+            _mockEventoBrutoRepository.Setup(x => x.CreateAsync(It.IsAny<EventoBruto>()))
+                                      .ReturnsAsync(Result<EventoBruto>.Failure(mensagem));
+
+            _mockEventoBrutoRepository.Setup(x => x.ExistsEventAsync(It.IsAny<string>()))
+                                      .ReturnsAsync(Result<bool>.Success(true));
+
+            _mockSendEndpointProvider.Setup(x => x.GetSendEndpoint(It.IsAny<Uri>()))
+                                     .ReturnsAsync(_mockSendEndpoint.Object);
+
+            var eventoBrutoService = new EventoBrutoService(_mockEventoBrutoRepository.Object, _mockSendEndpointProvider.Object, _mockLogger.Object);
+
+            // Act
+            var result = await eventoBrutoService.CreateEventAsync(eventoBruto);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(mensagem, result.Error);
+            Assert.Null(result.Message);
+            Assert.Null(result.Object);
+
+        }
+
         #region Metodos Privates
         private static PagamentoDto PagamentoDtoPayloadComSucesso()
         {
