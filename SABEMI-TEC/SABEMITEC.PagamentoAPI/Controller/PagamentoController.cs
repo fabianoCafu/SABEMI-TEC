@@ -10,43 +10,26 @@ namespace SABEMITEC.PagamentoAPI.Controller
     public class PagamentoController : ControllerBase
     {
         private readonly IEventoBrutoService _eventoBrutoService;
-        private readonly ILogger<PagamentoController> _logger;
-
+        
         public PagamentoController(
-            IEventoBrutoService eventoBrutoService,
-            ILogger<PagamentoController> logger)
+            IEventoBrutoService eventoBrutoService)
         {
             _eventoBrutoService = eventoBrutoService;
-            _logger = logger;
         }
 
         [HttpPost("pagamento")] 
         public async Task<IActionResult> Pagamento([FromBody] PagamentoDto pagamentoDto)
         {
-            try
+            
+            if (pagamentoDto is null)
             {
-                if (pagamentoDto is null)
-                {
-                    return NotFound("Dados do Pagamento não informado!");
-                }
-
-                var eventoBruto = new EventoBruto(pagamentoDto);
-                var result = await _eventoBrutoService.CreateEventAsync(eventoBruto);
-
-                if (result.IsFailure)
-                {
-                    return BadRequest(result.Error);
-                }
-                else
-                {
-                    return Ok("Cadastro realizado com Sucesso!");
-                }
+                return NotFound("Dados do Pagamento não informado!");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao receber evento de pagamento.");
-                return StatusCode(500, "Ocorreu um erro interno no servidor."); 
-            }
+
+            var eventoBruto = new EventoBruto(pagamentoDto);
+            var result = await _eventoBrutoService.CreateEventAsync(eventoBruto);
+
+            return (result.IsFailure) ? BadRequest(result.Error) : Ok("Cadastro realizado com Sucesso!");
         }
     }
 }

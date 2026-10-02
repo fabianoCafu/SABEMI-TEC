@@ -8,6 +8,7 @@ using SABEMITEC.ContratoAPI.Context;
 using SABEMITEC.ContratoAPI.Repository;
 using SABEMITEC.ContratoAPI.Service;
 using SABEMITEC.ContratoAPI.SignalR;
+using SABEMITEC.PagamentoAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 var connection = builder.Configuration.GetConnectionString("DBConnectionString");
@@ -72,7 +73,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("AngularPolicy");
 app.UseAuthorization();
 app.MapControllers();

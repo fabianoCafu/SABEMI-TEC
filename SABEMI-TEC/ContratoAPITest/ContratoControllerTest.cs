@@ -82,25 +82,25 @@ namespace SABEMITEC.ContratoAPI.Test.Controlles
             _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
         }
 
-        [Fact]
-        public async Task PagamentosProcessados_Deve_Retornar_InternalServerError500_QuandoOcorrerUmaException()
-        {
-            // Arrange
-            var mensagem = "Ocorreu um erro interno no servidor.";
-            _mockContratoService.Setup(x => x.GetListContractAsync())
-                                .ThrowsAsync(new Exception("Internal Server Error"));
+        //[Fact]
+        //public async Task PagamentosProcessados_Deve_Retornar_InternalServerError500_QuandoOcorrerUmaException()
+        //{
+        //    // Arrange
+        //    var mensagem = "Ocorreu um erro interno no servidor.";
+        //    _mockContratoService.Setup(x => x.GetListContractAsync())
+        //                        .ThrowsAsync(new Exception("Internal Server Error"));
 
-            // Act
-            var result = await _controller.PagamentosProcessados();
+        //    // Act
+        //    var result = await _controller.PagamentosProcessados();
 
-            // Assert
-            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+        //    // Assert
+        //    var statusCodeResult = Assert.IsType<ObjectResult>(result);
 
-            Assert.Equal(500, statusCodeResult.StatusCode);
-            Assert.Equal(mensagem, statusCodeResult.Value);
+        //    Assert.Equal(500, statusCodeResult.StatusCode);
+        //    Assert.Equal(mensagem, statusCodeResult.Value);
 
-            _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
-        }
+        //    _mockContratoService.Verify(x => x.GetListContractAsync(), Times.Once);
+        //}
 
         #endregion
     }

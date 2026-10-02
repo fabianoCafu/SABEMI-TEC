@@ -20,31 +20,16 @@ namespace SABEMITEC.ContratoAPI.Controllers
 
         [HttpGet("pagamentos-processados")]
         public async Task<IActionResult> PagamentosProcessados()
-        {
-            try
-            {
-                var result = await _contratoService.GetListContractAsync();
+        { 
+            var result = await _contratoService.GetListContractAsync();
 
-                if (result.IsFailure)
-                {
-                    return BadRequest(result.Error);
-                }
-                else
-                {
-                    if (result.Object is null)
-                    {    
-                        return NotFound(result.Message);
-                    }
-                    else
-                    {
-                        return Ok(result);
-                    }
-                }
-            }
-            catch (Exception ex)
+            if (result.IsFailure)
             {
-                _logger.LogError(ex, "Erro ao lista contratos.");
-                return StatusCode(500, "Ocorreu um erro interno no servidor.");
+                return BadRequest(result.Error);
+            }
+            else
+            {
+                return (result.Object is null) ? NotFound(result.Message) : Ok(result);
             }
         }
     }

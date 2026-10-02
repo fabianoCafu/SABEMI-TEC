@@ -67,6 +67,7 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 app.UseMiddleware<SignatureMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 app.Run();
 
